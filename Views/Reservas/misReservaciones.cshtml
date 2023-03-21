@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "¡Confirmación completada!";
+}
+@{
+    var imagen = ViewData["Imagen"];
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+
+    <p>Gracias por confirmar, con el siguiente código QR puede ingresar al cubículo </p>
+
+    <img src= @imagen width="400" height="400"/>
+
+    
+
+
+</div>

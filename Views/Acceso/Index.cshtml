@@ -1,0 +1,40 @@
+@model CubiculosTEC.Models.Acesso
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>Login CubiculosTEC</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        body {font-family: Arial;font-size: 10pt;}
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Index","Acceso", FormMethod.Post)){
+            <div class="box-credenciales">
+
+                <h1 style="margin-top: 2%; color:#004879">Inicio de sesión</h1>
+                
+                <div style="margin-bottom: 5%;">
+
+                    <h3 style="margin-top: 10%;">Dirección de correo electrónico:</h3>
+
+                    <h3> @Html.TextBoxFor(m => m.correo, new {@class="login-entry"}) </h3>
+                    <h3>@Html.ValidationMessageFor(m => m.correo,"", new {@class="error"})</h3>
+
+                    <h3 style="margin-top: 10%;">Contraseña:</h3>
+                    <h3>@Html.PasswordFor(m => m.contrasena , new {@class="login-entry"})</h3>
+                    <h3>@Html.ValidationMessageFor(m => m.contrasena,"", new {@class="error", @type="password"})</h3>
+                    <h3>@Html.ValidationMessage("Custom Error", new {@class="error"})</h3>
+ 
+                </div>
+                <button class="btn-accept" type="submit">Iniciar sesión</button>
+                <a style="margin-top: 30px;font-size: 20px; color: #004879" asp-area="" asp-controller="Registro" asp-action="Index">Registrar nuevo usuario</a>
+
+            </div>
+
+    }
+</body>
+</html>

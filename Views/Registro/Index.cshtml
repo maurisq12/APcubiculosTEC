@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style>
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type=number] {
+			-moz-appearance: textfield;
+		}
+	</style>
+
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form action="completarRegistro" method="post" class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<title>Registro</title>
+					<h1 style="color:#004879">Registro de usuario </h1>
+
+					<h2>
+						Por favor proporciona los siguientes datos para poder realizar el registro.
+					</h2>
+					<div class="cont-formulario">
+						<div>
+							<div class="wrap-input100 validate-input" data-validate="Numero de cédula">
+								<h3 style="font-size: 20px;">Número de cédula</h3><br>
+								<input class="input100 form-entry" type="number" maxlength="9" size="12"
+									pattern="/\d{9}/" name="cedula">
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
+							</div><br>
+
+							<div class="wrap-input100 validate-input" data-validate="Numero de carne">
+								<h3 style="font-size: 20px;">Número de carné</h3><br>
+								<input class="input100 form-entry" type="number" size="12" maxlength="10"
+									pattern="/\d{9}/" name="carne">
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
+							</div><br>
+
+							<div class="wrap-input100 validate-input " data-validate="Nombre">
+								<h3 style="font-size: 20px;">Nombre</h3><br>
+								<input class="input100 form-entry" type="text" size="40" name="nombre">
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div><br>
+
+							<div class="wrap-input100 validate-input">
+								<h3 style="font-size: 20px;">Primer apellido </h3><br>
+								<input class="input100 form-entry" type="text" size="40" name="primerApellido">
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div><br>
+
+							<div class="wrap-input100 validate-input">
+								<h3 style="font-size: 20px;">Segundo apellido </h3><br>
+								<input class=" input100 form-entry" type="text" size="40" name="segundoApellido">
+								<span class="focus-input100" data-placeholder="&#xf207;"></span>
+							</div><br>
+						</div>
+						<div style="display: flex;flex-direction: column">
+
+							<div class="wrap-input100 validate-input" data-validate="edad">
+								<h3 style="font-size: 20px;">Edad</h3><br>
+								<input class="input100 form-entry" type="number" size="5" min="17" max="99"
+									pattern="/\d{9}/" name="edad">
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
+							</div><br>
+
+							<div class="wrap-input100 validate-input" data-validate="Fecha de nacimiento">
+								<h3 style="font-size: 20px;">Fecha de nacimiento</h3><br>
+								<input class="input100 form-entry" type="date" name="fechaNacimiento"
+									placeholder="Fecha nacimiento">
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
+							</div><br>
+
+
+							<div class="wrap-input100 validate-input" data-validate="Enter email">
+								<h3 style="font-size: 20px;">Correo electrónico</h3><br>
+								<input class="input100 form-entry" type="email" name="correo" size="40"
+									placeholder="&#64;estudiantec.cr / &#64;itcr.ac.cr">
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
+							</div><br>
+
+							<div class="wrap-input100 validate-input" data-validate="Enter password">
+								<h3 style="font-size: 20px;">Contraseña</h3><br>
+								<input class="input100 form-entry" type="password" size="40" name="pass">
+								<br>Debe contener:
+								<br>-Mínimo 8 caracteres.
+								<br>-Al menos una letra mayúscula./n
+								<br>-Al menos una letra minúscula.
+								-<br>-Al menos un símbolo especial.</h3><br><br>
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
+							</div><br>
+							<button style="align-self: center;" class="btn-accept" type=SUBMIT>Registrarme</button>
+						</div>
+					</div>
+					<!--
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Registrarme
+						</button> 
+					</div>-->
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+</body>
+
+</html>
