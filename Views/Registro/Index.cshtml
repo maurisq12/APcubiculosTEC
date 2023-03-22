@@ -1,3 +1,6 @@
+@model CubiculosTEC.Models.Registro
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +11,6 @@
 			-webkit-appearance: none;
 			margin: 0;
 		}
-
 		input[type=number] {
 			-moz-appearance: textfield;
 		}
@@ -20,15 +22,14 @@
 </head>
 
 <body>
-
+	@using (Html.BeginForm("Index","Registro", FormMethod.Post)){
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form action="completarRegistro" method="post" class="login100-form validate-form">
+
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
-
 					<title>Registro</title>
 					<h1 style="color:#004879">Registro de usuario </h1>
 
@@ -36,36 +37,41 @@
 						Por favor proporciona los siguientes datos para poder realizar el registro.
 					</h2>
 					<div class="cont-formulario">
+
 						<div>
+							
 							<div class="wrap-input100 validate-input" data-validate="Numero de cédula">
 								<h3 style="font-size: 20px;">Número de cédula</h3><br>
-								<input class="input100 form-entry" type="number" maxlength="9" size="12"
-									pattern="/\d{9}/" name="cedula">
+								<h3>@Html.TextBoxFor(m => m.cedula, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.cedula,"", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
 
 							<div class="wrap-input100 validate-input" data-validate="Numero de carne">
 								<h3 style="font-size: 20px;">Número de carné</h3><br>
-								<input class="input100 form-entry" type="number" size="12" maxlength="10"
-									pattern="/\d{9}/" name="carne">
+								<h3>@Html.TextBoxFor(m => m.carne, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.carne,"", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
 
 							<div class="wrap-input100 validate-input " data-validate="Nombre">
 								<h3 style="font-size: 20px;">Nombre</h3><br>
-								<input class="input100 form-entry" type="text" size="40" name="nombre">
+								<h3>@Html.TextBoxFor(m => m.nombre, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.nombre,"", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf207;"></span>
 							</div><br>
 
 							<div class="wrap-input100 validate-input">
 								<h3 style="font-size: 20px;">Primer apellido </h3><br>
-								<input class="input100 form-entry" type="text" size="40" name="primerApellido">
+								<h3>@Html.TextBoxFor(m => m.apellido1, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.apellido1,"", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf207;"></span>
 							</div><br>
 
 							<div class="wrap-input100 validate-input">
 								<h3 style="font-size: 20px;">Segundo apellido </h3><br>
-								<input class=" input100 form-entry" type="text" size="40" name="segundoApellido">
+								<h3>@Html.TextBoxFor(m => m.apellido2, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.apellido2,"", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf207;"></span>
 							</div><br>
 						</div>
@@ -73,54 +79,47 @@
 
 							<div class="wrap-input100 validate-input" data-validate="edad">
 								<h3 style="font-size: 20px;">Edad</h3><br>
-								<input class="input100 form-entry" type="number" size="5" min="17" max="99"
-									pattern="/\d{9}/" name="edad">
+								<h3>@Html.TextBoxFor(m => m.edad, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.edad,"", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
 
 							<div class="wrap-input100 validate-input" data-validate="Fecha de nacimiento">
 								<h3 style="font-size: 20px;">Fecha de nacimiento</h3><br>
-								<input class="input100 form-entry" type="date" name="fechaNacimiento"
-									placeholder="Fecha nacimiento">
+								<h3>@Html.TextBoxFor(m => m.fechaNacimiento, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.fechaNacimiento,null, new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
 
 
 							<div class="wrap-input100 validate-input" data-validate="Enter email">
 								<h3 style="font-size: 20px;">Correo electrónico</h3><br>
-								<input class="input100 form-entry" type="email" name="correo" size="40"
-									placeholder="&#64;estudiantec.cr / &#64;itcr.ac.cr">
+								<h3>@Html.TextBoxFor(m => m.correo, new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.correo,"", new {@class="error"})</h3>
+								<h3>@Html.ValidationMessage("Custom Error", new {@class="error"})</h3>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
 
 							<div class="wrap-input100 validate-input" data-validate="Enter password">
 								<h3 style="font-size: 20px;">Contraseña</h3><br>
-								<input class="input100 form-entry" type="password" size="40" name="pass">
+								<h3>@Html.PasswordFor(m => m.contrasena , new {@class="login-entry"})</h3>
+								<h3>@Html.ValidationMessageFor(m => m.contrasena,"", new {@class="error"})
 								<br>Debe contener:
 								<br>-Mínimo 8 caracteres.
 								<br>-Al menos una letra mayúscula./n
 								<br>-Al menos una letra minúscula.
-								-<br>-Al menos un símbolo especial.</h3><br><br>
+								<br>-Al menos un símbolo especial.</h3><br><br>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
-							<button style="align-self: center;" class="btn-accept" type=SUBMIT>Registrarme</button>
+							<button style="align-self: center;" class="btn-accept" type="submit">Registrarme</button>
 						</div>
 					</div>
-					<!--
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Registrarme
-						</button> 
-					</div>-->
-
-				</form>
+	
+				</div>
 			</div>
 		</div>
-	</div>
-
-
-	<div id="dropDownSelect1"></div>
-
+	}
+	
 </body>
 
 </html>

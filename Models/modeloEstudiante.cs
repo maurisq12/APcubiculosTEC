@@ -2,7 +2,7 @@ namespace CubiculosTEC.Models;
 
 public class Estudiante{
 
-    private int IDEstudiante;
+    
     private int cedula;
     private int carne;
     private string nombre;

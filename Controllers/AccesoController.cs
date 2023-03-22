@@ -24,7 +24,7 @@ public class AccesoController : Controller{
             if(sesion.nombre!=null){
                 var claims = new List<Claim> {
                 new Claim(ClaimTypes.Email, objeto.correo),
-                new Claim(ClaimTypes.Role, sesion.rol)
+                new Claim(ClaimTypes.Role, "estudiante")
             };
 
             var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
