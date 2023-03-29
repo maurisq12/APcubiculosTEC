@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Administradores](
-	[idAdministradores] [int] NOT NULL,
+	[idAdministradores] [int] IDENTITY(1,1) NOT NULL,
 	[correo] [varchar](50) NOT NULL,
 	[contrasena] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Administradores] PRIMARY KEY CLUSTERED 
@@ -21,7 +21,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Cubiculos](
-	[idCubiculo] [int] NOT NULL,
+	[idCubiculo] [int] IDENTITY(1,1) NOT NULL,
 	[nombre] [varchar](50) NOT NULL,
 	[idEstado] [smallint] NOT NULL,
 	[capacidad] [int] NOT NULL,
@@ -38,7 +38,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[EstadosCubiculo](
-	[idEstado] [smallint] NOT NULL,
+	[idEstado] [smallint] IDENTITY(1,1) NOT NULL,
 	[estadoActual] [varchar](50) NOT NULL,
  CONSTRAINT [PK_EstadosCubiculo] PRIMARY KEY CLUSTERED 
 (
@@ -52,7 +52,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[EstadosEstudiante](
-	[idEstadoEstudiante] [smallint] NOT NULL,
+	[idEstadoEstudiante] [smallint] IDENTITY(1,1) NOT NULL,
 	[estado] [varchar](50) NOT NULL,
  CONSTRAINT [PK_EstadosEstudiante] PRIMARY KEY CLUSTERED 
 (
@@ -66,7 +66,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Estudiantes](
-	[idEstudiante] [int] NOT NULL,
+	[idEstudiante] [int] IDENTITY(1,1) NOT NULL,
 	[correo] [varchar](50) NOT NULL,
 	[contrasena] [varchar](50) NOT NULL,
 	[nombre] [varchar](50) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[Reservaciones](
 	[horaFinal] [time](0) NOT NULL,
 	[confirmacion] [bit] NOT NULL,
 	[fechaDeReservacion] [date] NOT NULL,
-	[idReservacion] [int] NOT NULL,
+	[idReservacion] [int] IDENTITY(1,1) NOT NULL,
  CONSTRAINT [PK_Reservaciones] PRIMARY KEY CLUSTERED 
 (
 	[idReservacion] ASC
@@ -117,7 +117,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ServiciosEspeciales](
-	[idServicioEspecial] [smallint] NOT NULL,
+	[idServicioEspecial] [smallint] IDENTITY(1,1) NOT NULL,
 	[servicioEspecial] [varchar](50) NOT NULL,
  CONSTRAINT [PK_ServiciosEspeciales] PRIMARY KEY CLUSTERED 
 (
