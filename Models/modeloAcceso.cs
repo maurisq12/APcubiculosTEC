@@ -5,7 +5,7 @@ namespace CubiculosTEC.Models;
 
 
 
-public class Acesso{
+public class Acceso{
 
     [Required (ErrorMessage ="Proporcione un correo.")]
     [RegularExpression(@"[a-z0-9]+@+(estudiantec.cr|itcr.ac.cr)",ErrorMessage ="Introduzca un correo institucional válido.")]

@@ -1,5 +1,4 @@
 USE CubiculosTEC
-GO
 
 
 
@@ -45,7 +44,7 @@ INSERT INTO dbo.ServiciosEspeciales (servicioEspecial)
 VALUES ('Teclado Especial')
 
 INSERT INTO dbo.ServiciosEspeciales (servicioEspecial)
-VALUES ('Línea Braille')
+VALUES ('LÃ­nea Braille')
 
 INSERT INTO dbo.ServiciosEspeciales (servicioEspecial)
 VALUES ('Impresora Fuse')

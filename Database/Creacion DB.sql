@@ -1,10 +1,10 @@
 USE [CubiculosTEC]
-GO
+ 
 /****** Object:  Table [dbo].[Administradores]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[Administradores](
 	[idAdministradores] [int] IDENTITY(1,1) NOT NULL,
 	[correo] [varchar](50) NOT NULL,
@@ -14,12 +14,12 @@ CREATE TABLE [dbo].[Administradores](
 	[idAdministradores] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[Cubiculos]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[Cubiculos](
 	[idCubiculo] [int] IDENTITY(1,1) NOT NULL,
 	[nombre] [varchar](50) NOT NULL,
@@ -31,12 +31,12 @@ CREATE TABLE [dbo].[Cubiculos](
 	[idCubiculo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[EstadosCubiculo]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[EstadosCubiculo](
 	[idEstado] [smallint] IDENTITY(1,1) NOT NULL,
 	[estadoActual] [varchar](50) NOT NULL,
@@ -45,12 +45,12 @@ CREATE TABLE [dbo].[EstadosCubiculo](
 	[idEstado] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[EstadosEstudiante]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[EstadosEstudiante](
 	[idEstadoEstudiante] [smallint] IDENTITY(1,1) NOT NULL,
 	[estado] [varchar](50) NOT NULL,
@@ -59,12 +59,12 @@ CREATE TABLE [dbo].[EstadosEstudiante](
 	[idEstadoEstudiante] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[Estudiantes]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[Estudiantes](
 	[idEstudiante] [int] IDENTITY(1,1) NOT NULL,
 	[correo] [varchar](50) NOT NULL,
@@ -80,12 +80,12 @@ CREATE TABLE [dbo].[Estudiantes](
 	[idEstudiante] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[Reservaciones]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[Reservaciones](
 	[idCubiculo] [int] NOT NULL,
 	[idEstudiante] [int] NOT NULL,
@@ -100,22 +100,22 @@ CREATE TABLE [dbo].[Reservaciones](
 	[idReservacion] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[ServiciosCubiculo]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[ServiciosCubiculo](
 	[idServicioEspecial] [smallint] NOT NULL,
 	[idReservacion] [int] NOT NULL
 ) ON [PRIMARY]
-GO
+ 
 /****** Object:  Table [dbo].[ServiciosEspeciales]    Script Date: 3/18/2023 7:31:22 PM ******/
 SET ANSI_NULLS ON
-GO
+ 
 SET QUOTED_IDENTIFIER ON
-GO
+ 
 CREATE TABLE [dbo].[ServiciosEspeciales](
 	[idServicioEspecial] [smallint] IDENTITY(1,1) NOT NULL,
 	[servicioEspecial] [varchar](50) NOT NULL,
@@ -124,34 +124,34 @@ CREATE TABLE [dbo].[ServiciosEspeciales](
 	[idServicioEspecial] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
+ 
 ALTER TABLE [dbo].[Cubiculos]  WITH CHECK ADD  CONSTRAINT [FK_Cubiculos_EstadosCubiculo] FOREIGN KEY([idEstado])
 REFERENCES [dbo].[EstadosCubiculo] ([idEstado])
-GO
+ 
 ALTER TABLE [dbo].[Cubiculos] CHECK CONSTRAINT [FK_Cubiculos_EstadosCubiculo]
-GO
+ 
 ALTER TABLE [dbo].[Estudiantes]  WITH CHECK ADD  CONSTRAINT [FK_Estudiantes_EstadosEstudiante] FOREIGN KEY([idEstadoEstudiante])
 REFERENCES [dbo].[EstadosEstudiante] ([idEstadoEstudiante])
-GO
+ 
 ALTER TABLE [dbo].[Estudiantes] CHECK CONSTRAINT [FK_Estudiantes_EstadosEstudiante]
-GO
+ 
 ALTER TABLE [dbo].[Reservaciones]  WITH CHECK ADD  CONSTRAINT [FK_Reservaciones_Cubiculos] FOREIGN KEY([idCubiculo])
 REFERENCES [dbo].[Cubiculos] ([idCubiculo])
-GO
+ 
 ALTER TABLE [dbo].[Reservaciones] CHECK CONSTRAINT [FK_Reservaciones_Cubiculos]
-GO
+ 
 ALTER TABLE [dbo].[Reservaciones]  WITH CHECK ADD  CONSTRAINT [FK_Reservaciones_Estudiantes] FOREIGN KEY([idEstudiante])
 REFERENCES [dbo].[Estudiantes] ([idEstudiante])
-GO
+ 
 ALTER TABLE [dbo].[Reservaciones] CHECK CONSTRAINT [FK_Reservaciones_Estudiantes]
-GO
+ 
 ALTER TABLE [dbo].[ServiciosCubiculo]  WITH CHECK ADD  CONSTRAINT [FK_ServiciosCubiculo_Reservaciones] FOREIGN KEY([idReservacion])
 REFERENCES [dbo].[Reservaciones] ([idReservacion])
-GO
+ 
 ALTER TABLE [dbo].[ServiciosCubiculo] CHECK CONSTRAINT [FK_ServiciosCubiculo_Reservaciones]
-GO
+ 
 ALTER TABLE [dbo].[ServiciosCubiculo]  WITH CHECK ADD  CONSTRAINT [FK_ServiciosCubiculo_ServiciosEspeciales] FOREIGN KEY([idServicioEspecial])
 REFERENCES [dbo].[ServiciosEspeciales] ([idServicioEspecial])
-GO
+ 
 ALTER TABLE [dbo].[ServiciosCubiculo] CHECK CONSTRAINT [FK_ServiciosCubiculo_ServiciosEspeciales]
-GO
+ 

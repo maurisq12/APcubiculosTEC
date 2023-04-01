@@ -14,6 +14,12 @@ public class Cubiculos : Controller
 
     //SET: /Cubi/
     public IActionResult reservar(){
+        var cubiculos= Cubiculo.cubiculosDisponibles();
+
+        for(int i=0;i<cubiculos.Count;i++)
+        {
+        Console.WriteLine("ID: "+cubiculos[i].getId().ToString()+" Nombre: "+cubiculos[i].getNombre()+ " Capacidad: "+cubiculos[i].getCapacidad());
+        }
         return View();
     }
 

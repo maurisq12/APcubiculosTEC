@@ -3,14 +3,20 @@ namespace CubiculosTEC.Models;
 public class Estudiante{
 
     
-    private int cedula;
-    private int carne;
-    private string nombre;
-    private string apellido1;
-    private string apellido2;
-    private int edad;
-    private DateTime fechaNacimiento;
-    private string correo;
+    public int cedula;
+    public int carne;
+    public string nombre;
+    public string apellido1;
+    public string apellido2;
+    public int edad;
+    public DateTime fechaNacimiento;
+    public string correo;
+
+    public string rol;
+
+    public Estudiante(){
+        
+    }
 
 
     public Estudiante(int pCedula, int pCarne, string pNombre, string pApellido1, string pApellido2, int pEdad, DateTime pFechaNacimiento, string pCorreo){
@@ -23,4 +29,10 @@ public class Estudiante{
         fechaNacimiento=pFechaNacimiento;
         correo=pCorreo;
     }
+
+    public void setNombre(string pNombre){
+        nombre=pNombre;
+    }
+
+    
 }
