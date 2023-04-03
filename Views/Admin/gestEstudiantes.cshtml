@@ -3,12 +3,43 @@
     Layout = "AdminLayout";
 }
 
+<style> 
+    .editarBoton{
+    height:1px;
+    width:80px;
+    text-align: left;
+    line-height: 1px;
+}
+</style>
+
+<script>
+function buscar() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("busq");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tablaEstudiantes");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
 <div class="text-center">
     <h1 class="display-4">Gestión de estudiantes</h1>
 
     <div style="display: flex; flex-direction: column">
-        <input class="search-bar" placeholder="Buscar">  </input>
-        <table style="margin-top: 60px;" class="table">
+        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar estudiante...">
+        <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
             <thead >
                 <tr style="background: #299CCB">
                 <th>Nombre</th>
@@ -21,58 +52,17 @@
 
             </thead>
             <tbody>
-                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td><button class="btn-accept">sddddfg</button></td>
-                </tr>
-                                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td>aaa</td>
-                </tr>
-                                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td>aaa</td>
-                </tr>
-                                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td>aaa</td>
-                </tr>
-                                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td>aaa</td>
-                </tr>
-                                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td>aaa</td>
-                </tr>
-                                <tr>
-                <td>Juan</td>
-                <td>2121555</td>
-                <td>Juan@asdf</td>
-                <td>act</td>
-                <td>aaa</td>
-                </tr>
+                @foreach (var unEstudiante in ViewBag.Estudiantes)
+                {
+                    <tr>
+                    <td align="center" colspan="2"> @unEstudiante.nombre @unEstudiante.apellido1 @unEstudiante.apellido2 </td>
+                    <td align="center" colspan="2"> 2023123456 </td>
+                    <td align="center" colspan="2"> @unEstudiante.correo </td>
+                    <td align="center" colspan="2"> @unEstudiante.estado </td>
+                    <td><button>Editar</button></td>
+                    </tr>
+                }
             </tbody>
-
-
         </table>
     </div>
 </div>
