@@ -1,51 +1,116 @@
-@{var todosCubiculos = ViewBag.Cubiculos;}
+@{
+    var todosCubiculos = ViewBag.Cubiculos;
+}
 
 <script>
     function myFunction(e) {
 
-        if (confirm("Press a button!"+e)) {
+        if (confirm("Press a button!" + e)) {
             txt = "You pressed OK!";
-            } else {
+            WriteLine(txt)
+        } else {
             txt = "You pressed Cancel!";
-            }
-  }
+                        WriteLine(txt)
+
+        }
+    }
 
 
 </script>
 
 
 <html lang="en">
+
 <head>
     @{
         ViewData["Title"] = "Reservar cubículo";
     }
     <h1 style="color: #084e7d">@ViewData["Title"]</h1>
     <link rel="stylesheet" href="./src/tablesort.css">
-    
+
     <p>
-    <style>     
-     body {
-            overflow: hidden;
-            background-color: #e6f4f1;
-    }
-    th, td {
-      border-bottom: 1px solid;
-    }
-    table, th, td {
-      border-collapse: collapse;
-    }
-
-    table.row-clickable tbody tr td {
-    padding: 0;
-    }
-
-    table.row-clickable tbody tr td a {
-        display: block;
-        padding: 8px;
-    }
-  </style>
 </head>
+
 <body>
+    <div class="cont-formulario">
+        <table style="margin-top: 60px; width: 50%;" class="table">
+            <thead>
+                <tr style="background: #299CCB">
+                    <th style="color:white; font-size:110%">Número de cubículo</th>
+                    <th style="color:white; font-size:110%">Capacidad</th>
+                    <th> </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var unCubiculo in ViewBag.Cubiculos)
+                {
+                    <tr onclick="myFunction(\'' + @unCubiculo.getNombre() + '\')">
+                        <td> @unCubiculo.getNombre() </td>
+                        <td> @unCubiculo.getCapacidad() </td>
+                        <td> <button OnClientClick="return myFunction();" class="btn-select">Seleccionar</button>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+        <table style="width: 35%; position: relative; border: 2px solid #006194;">
+            <thead>
+                <tr height="100" style="background-color: #299CCB;">
+                    <td width="175" style="color:white; font-size:110%" align="center">¿Desea reservar este cubículo?
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="center">Cubiculo 5</td>
+                </tr>
+                <tr>
+                    <td align="center">Capacidad 3</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <div>
+                            <form action=".." method="GET">
+                                <div style="margin-bottom: 20px">
+                                    <label for="date">Fecha de apartado: </label>
+                                    <input class="form-entry" type="date" name="date" id="date" min="2023-21-03"
+                                        required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="inicio">Hora inicio </label>
+                                    <input class="form-entry" type="time" name="inicio" id="inicio" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="fin">Hora fin </label>
+                                    <input class="form-entry" type="time" name="fin" id="fin" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="servicio1">Servicio 1</label>
+                                    <input type="radio" name="servicio" id="servicio1" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="servicio2">Servicio 2</label>
+                                    <input type="radio" name="servicio" id="servicio2" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="servicio3">Servicio 3</label>
+                                    <input type="radio" name="servicio" id="servicio3" required>
+                                </div>
+                                <button type="submit" class="btn-accept">Reservar Cubículo</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
     <div style="height: 700px; width: 700px; overflow: auto">
         <table class="table table-sortable table-hover row-clickable" style="border: 2px solid #006194;">
             <thead>
@@ -68,45 +133,47 @@
                 {
                     <var>id</var>
                     <tr height="50" onclick="myFunction(\'' + @unCubiculo.getNombre() + '\')">
-                    <td align="center" colspan="2"> @unCubiculo.getNombre() </td>
-                    <td align="center" colspan="2"> @unCubiculo.getCapacidad() </td>
+                        <td align="center" colspan="2"> @unCubiculo.getNombre() </td>
+                        <td align="center" colspan="2"> @unCubiculo.getCapacidad() </td>
                     </tr>
                 }
-                    
+
             </tbody>
         </table>
     </div>
 
     <table style="height: 700px; width: 500px; top: -700px; left:800px; position: relative; border: 2px solid #006194;">
         <thead>
-                <tr height="100" style="background-color: #00ABE4;">
-                    <td width="175" style="color:white; font-size:150%" align="center">¿Desea reservar este cubículo?</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td align="center">
+            <tr height="100" style="background-color: #00ABE4;">
+                <td width="175" style="color:white; font-size:150%" align="center">¿Desea reservar este cubículo?</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="center">
                     Cubiculo 5<p>
-                    Capacidad: 6<p>
-                    Servicios: NVDA</td>
-                </tr>
-                <tr height="400">
-                    
-                </tr>
-            </tbody>
+                        Capacidad: 6
+                    <p>
+                        Servicios: NVDA
+                </td>
+            </tr>
+            <tr height="400">
+
+            </tr>
+        </tbody>
     </table>
-    
+
     <div style="top: -1000px; left:900px; position: relative">
         <form action=".." method="GET">
-            <div> 
+            <div>
                 <label for="date">Fecha de apartado: </label>
                 <input type="date" name="date" id="date" min="2023-21-03" required>
             </div>
-            <div> 
+            <div>
                 <label for="inicio">Hora inicio </label>
                 <input type="time" name="inicio" id="inicio" required>
             </div>
-            <div> 
+            <div>
                 <label for="fin">Hora fin </label>
                 <input type="time" name="fin" id="fin" required>
             </div>
@@ -126,4 +193,5 @@
         </form>
     </div>
 </body>
+
 </html>

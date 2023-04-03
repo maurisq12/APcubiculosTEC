@@ -83,3 +83,9 @@ body {
   max-width: 305px;
   margin-top: 50px;
 }
+
+.btn-select{
+  border-radius: 10px 10px 10px 10px;
+  background-color: #007904;
+  -webkit-text-fill-color: white;
+}
