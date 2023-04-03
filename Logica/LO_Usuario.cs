@@ -102,19 +102,39 @@ public class LO_Usuario{
         cmd.Parameters.AddWithValue("@pCorreo",pCorreo);
         cmd.Parameters.AddWithValue("@pContrasena",pContrasena);
 
-        if (conectado.State != ConnectionState.Open){
-
-            conectado.Close();
-            conectado.Open();
-        }
-        
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
                 objeto = new Estudiante();
-                objeto.setNombre(dr["Nombre"].ToString());
+                objeto.correo= dr["correo"].ToString();
+                objeto.id = Int32.Parse((dr["idEstudiante"].ToString()));
 
             }
         }
+        conectado.Close();
+        return objeto;  
+    }
+
+    public Administrador encontrarAdmin(string pCorreo, string pContrasena){
+        Administrador objeto = new Administrador();
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "SELECT idAdministradores, correo FROM Administradores WHERE correo=@pCorreo and contrasena = @pContrasena";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@pCorreo",pCorreo);
+        cmd.Parameters.AddWithValue("@pContrasena",pContrasena);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                objeto = new Administrador();
+                objeto.id= Int32.Parse(dr["idAdministradores"].ToString());
+                objeto.correo = (dr["correo"].ToString());
+
+            }
+        }
+        conectado.Close();
         return objeto;  
     }
 }

@@ -9,6 +9,8 @@ public class SQLConexion{
 
     static string connectionString = "Server=cubiculosTEC.mssql.somee.com;Database=CubiculosTEC;User Id=maurisq_SQLLogin_1;Password=ecs335m2na;";
 
+
+
     public SqlConnection establecer(){
         try{
             conex.ConnectionString=connectionString;

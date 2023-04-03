@@ -21,8 +21,9 @@ public class AccesoController : Controller{
         if(ModelState.IsValid){   
             if (Regex.IsMatch(objeto.correo,"[a-z0-9]+@+estudiantec.cr")){      
                 Estudiante sesion = new LO_Usuario().encontrarEstudiante(objeto.correo,objeto.contrasena);
-                if(sesion.nombre!=null){
+                if(sesion.correo!=null){
                     var claims = new List<Claim> {
+                    new Claim(ClaimTypes.NameIdentifier, sesion.id.ToString()),
                     new Claim(ClaimTypes.Email, objeto.correo),
                     new Claim(ClaimTypes.Role, "estudiante")
                 };
@@ -33,7 +34,7 @@ public class AccesoController : Controller{
 
 
 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index","Cubiculos");
                     
                 }
                 else{
@@ -41,6 +42,29 @@ public class AccesoController : Controller{
                 }
                 return View();
 
+
+            }
+            else{
+                Administrador sesion = new LO_Usuario().encontrarAdmin(objeto.correo,objeto.contrasena);
+                if(sesion.correo!=null){
+                    var claims = new List<Claim> {
+                    new Claim(ClaimTypes.Email, objeto.correo),
+                    new Claim(ClaimTypes.Role, "administrador")
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+
+
+                return RedirectToAction("Index","Admin");
+                    
+                }
+                else{
+                    ModelState.AddModelError("Custom Error","Credenciales incorrectos");
+                }
+                return View();
 
             }
             return View();

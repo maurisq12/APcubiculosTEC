@@ -23,36 +23,6 @@ public class Cubiculo{
         capacidad=pCapacidad;
     }
 
-    public static List<Cubiculo> cubiculosDisponibles(){
-        var listaResultado = new List<Cubiculo>();
-
-        SQLConexion conex = new SQLConexion();
-        SqlConnection conectado=  conex.establecer();
-
-        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo FROM Cubiculos WHERE idEstado=1;";
-
-        SqlCommand cmd = new SqlCommand(query,conectado);
-
-        if (conectado.State != ConnectionState.Open){
-
-            conectado.Close();
-            conectado.Open();
-        }
-        
-        using (SqlDataReader dr = cmd.ExecuteReader()){
-            while(dr.Read()){
-                Cubiculo objeto = new Cubiculo(){
-                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
-                    nombre= dr["nombre"].ToString(),
-                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
-                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
-                };
-                listaResultado.Add(objeto);
-            }
-        }
-        return listaResultado;  
-    }
-
     public string getNombre(){
         return nombre;
     }
@@ -68,6 +38,229 @@ public class Cubiculo{
     public int getCapacidad(){
         return capacidad;
     }
+
+    public static List<Cubiculo> cubiculosDisponibles(){
+        var listaResultado = new List<Cubiculo>();
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo FROM Cubiculos WHERE idEstado=1;";
+        
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
+                    nombre= dr["nombre"].ToString(),
+                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
+                };
+                listaResultado.Add(objeto);
+            }
+        }
+        conectado.Close();
+        return listaResultado;  
+    }
+
+    public static List<Cubiculo> cubiculosTodos(){
+        var listaResultado = new List<Cubiculo>();
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo FROM Cubiculos;";
+        
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
+                    nombre= dr["nombre"].ToString(),
+                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
+                };
+                listaResultado.Add(objeto);
+            }
+        }
+        conectado.Close();
+        return listaResultado;  
+    }
+
+
+    public static Boolean reservarCubiculo(int pIdCubiculo, int pIdEstudiante, DateTime pFechaDeUso, DateTime pHoraInicio, DateTime pHoraFinal, DateTime pFechaDeReservacion){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "agregarReservacion @idCubiculo, @idEstudiante, @fechaDeUso, @horaInicio, @horaFinal, @fechaDeReservacion;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
+        cmd.Parameters.AddWithValue("@idEstudiante",pIdEstudiante);
+        cmd.Parameters.AddWithValue("@fechaDeUso",pFechaDeUso);
+        cmd.Parameters.AddWithValue("@horaInicio",pHoraInicio);
+        cmd.Parameters.AddWithValue("@horaFinal",pHoraFinal);
+        cmd.Parameters.AddWithValue("@fechaDeReservacion",pFechaDeReservacion);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
+                    nombre= dr["nombre"].ToString(),
+                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    public static Boolean crearCubiculo(string pNombre, int pEstado, int pCapacidad){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "agregarCubiculo @pNombre, @pEstado, @pCapacidad;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@pNombre",pNombre);
+        cmd.Parameters.AddWithValue("@pEstado",pEstado);
+        cmd.Parameters.AddWithValue("@pCapacidad",pCapacidad);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    public static Boolean editarCubiculo(int pIdCubiculo, string pNombre, int pEstado, int pCapacidad){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "editarCubiculo @idCubiculo, @pNombre, @pEstado, @pCapacidad;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
+        cmd.Parameters.AddWithValue("@pNombre",pNombre);
+        cmd.Parameters.AddWithValue("@pEstado",pEstado);
+        cmd.Parameters.AddWithValue("@pCapacidad",pCapacidad);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    public static Boolean eliminarCubiculo(int pIdCubiculo){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "eliminarCubiculo @idCubiculo;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    public static Boolean cambiarEstadoCubiculo(int pIdCubiculo, int pEstado){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "cambiarEstadoCubiculo @idCubiculo, @pEstado;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
+        cmd.Parameters.AddWithValue("@pEstado",pEstado);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    public static Boolean bloqueoCubiculo(int pIdCubiculo, DateTime pFechaInicio, DateTime pFechaFin, DateTime pHoraInicio, DateTime pHoraFin ){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "cambiarEstadoCubiculo @idCubiculo, @pFechaInicio, @pFechaFin, @pHoraInicio, @pHoraFin;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
+        cmd.Parameters.AddWithValue("@pFechaInicio",pFechaInicio);
+        cmd.Parameters.AddWithValue("@pFechaFin",pFechaFin);
+        cmd.Parameters.AddWithValue("@pHoraInicio",pHoraInicio);
+        cmd.Parameters.AddWithValue("@pHoraFin",pHoraFin);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    public static Boolean tiempoMaximoCubiculo(int pIdCubiculo, DateTime pMaximo){
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "tiempoMaximoCubiculo @idCubiculo, @pMaximo;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
+        cmd.Parameters.AddWithValue("@pMaximo",pMaximo);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
+                };
+            }
+        }
+        conectado.Close();
+        return true;
+    }
+
+    
+
+
 
 } 
 

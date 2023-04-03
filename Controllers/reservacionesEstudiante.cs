@@ -2,10 +2,11 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CubiculosTEC.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Data.SqlClient;
 
 namespace CubiculosTEC.Controllers;
 
-[Authorize(Roles="2")]
+[Authorize(Roles="estudiante")]
 
 public class Reservas : Controller
 {
@@ -17,11 +18,21 @@ public class Reservas : Controller
 
     //SET: /Cubi/
     public IActionResult misReservaciones(){
+
+        
+
+        return View();
+
+
+
+
+
+        /*
         Models.CodigosQR miQR = new CodigosQR();
         string elcodigo64 = miQR.crearCodigo();
         string codigoListo = "data:image/png;charset=utf-8;base64,"+elcodigo64;
         ViewData["Imagen"]= codigoListo;
-        return View();
+        return View();*/
     }
 
     public string confirmando(){

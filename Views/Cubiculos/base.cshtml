@@ -1,0 +1,130 @@
+<html lang="en">
+<head>
+    @{
+        ViewData["Title"] = "Reservar cubículo";
+    }
+    <h1 style="color: #084e7d">@ViewData["Title"]</h1>
+    <link rel="stylesheet" href="./src/tablesort.css">
+    
+    <p>
+    <style>     
+     body {
+            overflow: hidden;
+            background-color: #e6f4f1;
+    }
+    th, td {
+      border-bottom: 1px solid;
+    }
+    table, th, td {
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+    <div style="height: 700px; width: 700px; overflow: auto">
+        <table class="table-sortable" style="border: 2px solid #006194;">
+            <thead>
+                <tr height="50" style="background-color: #00ABE4; position: sticky; top: 0;">
+                    <td width="175" style="color:white; font-size:150%" align="center">Filtrado</td>
+                    <td width="175" style="color:white" align="center">Fecha
+                        <select class="table-filter">
+                            <option value="all"></option>
+                        </select>
+                    </td>
+                    <td width="350" style="color:white" align="center">Capacidad
+                        <select class="table-filter">
+                            <option value="all"></option>
+                        </select>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 1</td>
+                    <td align="center">Capacidad: 3</td>
+                    <td align="center">JAWS</td>
+                </tr>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 5</td>
+                    <td align="center">Capacidad: 6</td>
+                    <td align="center">NVDA</td>
+                </tr>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 8</td>
+                    <td align="center">Capacidad: 4</td>
+                    <td align="center">Ninguno</td>
+                </tr>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 12</td>
+                    <td align="center">Capacidad: 5</td>
+                    <td align="center">JAWS</td>
+                </tr>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 17</td>
+                    <td align="center">Capacidad: 5</td>
+                    <td align="center">Lanbda 1.4</td>
+                </tr>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 20</td>
+                    <td align="center">Capacidad: 5</td>
+                    <td align="center">Ninguno</td>
+                </tr>
+                <tr height="100">
+                    <td align="center" colspan="2">Cubiculo 21</td>
+                    <td align="center">Capacidad: 6</td>
+                    <td align="center">JAWS</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <table style="height: 700px; width: 500px; top: -700px; left:800px; position: relative; border: 2px solid #006194;">
+        <thead>
+                <tr height="100" style="background-color: #00ABE4;">
+                    <td width="175" style="color:white; font-size:150%" align="center">¿Desea reservar este cubículo?</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="center">
+                    Cubiculo 5<p>
+                    Capacidad: 6<p>
+                    Servicios: NVDA</td>
+                </tr>
+                <tr height="400">
+                    
+                </tr>
+            </tbody>
+    </table>
+    
+    <div style="top: -1000px; left:900px; position: relative">
+        <form action=".." method="GET">
+            <div> 
+                <label for="date">Fecha de apartado: </label>
+                <input type="date" name="date" id="date" min="2023-21-03" required>
+            </div>
+            <div> 
+                <label for="inicio">Hora inicio </label>
+                <input type="time" name="inicio" id="inicio" required>
+            </div>
+            <div> 
+                <label for="fin">Hora fin </label>
+                <input type="time" name="fin" id="fin" required>
+            </div>
+            <div>
+                <label for="servicio1">Servicio 1</label>
+                <input type="radio" name="servicio" id="servicio1" required>
+            </div>
+            <div>
+                <label for="servicio2">Servicio 2</label>
+                <input type="radio" name="servicio" id="servicio2" required>
+            </div>
+            <div>
+                <label for="servicio3">Servicio 3</label>
+                <input type="radio" name="servicio" id="servicio3" required>
+            </div>
+            <button type="submit">Reservar Cubículo</button>
+        </form>
+    </div>
+</body>
+</html>
