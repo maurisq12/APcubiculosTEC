@@ -14,6 +14,8 @@ public class Estudiante{
     public DateTime fechaNacimiento;
     public string correo;
 
+    public int estado;
+
     public string rol;
 
     public Estudiante(){
@@ -34,6 +36,54 @@ public class Estudiante{
 
     public void setNombre(string pNombre){
         nombre=pNombre;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public string getNombre(){
+        return nombre;
+    }
+
+    public string getApellido1(){
+        return apellido1;
+    }
+
+    public string getApellido2(){
+        return apellido2;
+    }
+
+    
+
+
+    public static List<Estudiante> todosEstudiantes(){
+        var listaResultado = new List<Estudiante>();
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "SELECT idEstudiante, nombre, apellido1, apellido2, correo,idEstadoEstudiante, edad FROM Estudiantes;";
+        
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Estudiante objeto = new Estudiante(){
+                    id=Int32.Parse(dr["idEstudiante"].ToString()),
+                    nombre= dr["nombre"].ToString(),
+                    apellido1=dr["apellido1"].ToString(),
+                    apellido2=dr["apellido2"].ToString(),
+                    edad=Int32.Parse(dr["edad"].ToString()),
+                    estado=Int32.Parse(dr["idEstadoEstudiante"].ToString()),
+                    correo=dr["correo"].ToString() 
+                };
+                listaResultado.Add(objeto);
+            }
+        }
+        conectado.Close();
+        return listaResultado; 
     }
 
     public static Boolean editarEstudiante(int pIdEstudiante, int pCedula, int pCarne, string pNombre, string pApellido1, string pApellido2, int pEdad, DateTime pFechaNacimiento, string pCorreo, string pContrasena){

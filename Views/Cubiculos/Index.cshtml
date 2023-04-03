@@ -66,8 +66,7 @@
             <tbody>
                 @foreach (var unCubiculo in ViewBag.Cubiculos)
                 {
-                    <var>id</var>
-                    <tr height="50" onclick="myFunction(\'' + @unCubiculo.getNombre() + '\')">
+                    <tr height="50">
                     <td align="center" colspan="2"> @unCubiculo.getNombre() </td>
                     <td align="center" colspan="2"> @unCubiculo.getCapacidad() </td>
                     </tr>

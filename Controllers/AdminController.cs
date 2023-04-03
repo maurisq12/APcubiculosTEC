@@ -14,6 +14,12 @@ public class Admin : Controller
 
     //SET: /Cubi/
     public IActionResult gestEstudiantes(){
+        var estudiantes = Estudiante.todosEstudiantes();
+        foreach(Estudiante unEs in estudiantes){
+            Console.WriteLine(unEs.getNombre());
+
+        }
+        ViewBag.Estudiantes = estudiantes;
         return View();
     }
         public IActionResult gestCubiculos(){
