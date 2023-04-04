@@ -6,6 +6,8 @@ namespace CubiculosTEC.Models;
 public class Reservacion{
 
     public int idEstudiante;
+
+    public string estudianteReservador;
     public int idCubiculo;
     public DateTime fechaDeUso;
     public DateTime horaInicio;
@@ -77,7 +79,7 @@ public class Reservacion{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "SELECT idCubiculo, idEstudiante.Nombre, Estudiantes.apellido1,Estudiantes.apellido2, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones INNER JOIN Estudiantes ON Reservaciones.idEstudiante = Estudiantes.idEstudiante;";
+        string query= "SELECT idCubiculo, Estudiantes.Nombre, Estudiantes.apellido1,Estudiantes.apellido2, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones INNER JOIN Estudiantes ON Reservaciones.idEstudiante = Estudiantes.idEstudiante;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         
@@ -86,6 +88,7 @@ public class Reservacion{
                 Reservacion objeto = new Reservacion(){
                     idEstudiante=Int32.Parse(dr["idCubiculo"].ToString()),
                     idCubiculo=Int32.Parse(dr["idEstudiante"].ToString()),
+                    estudianteReservador=dr["Estudiantes.Nombre"].ToString()+dr["Estudiantes.apellido1"].ToString()+dr["Estudiantes.apellido2"].ToString()
                 };
                 todasReservaciones.Add(objeto);
             }

@@ -56,7 +56,8 @@ public class Cubiculo{
                     IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
                     nombre= dr["nombre"].ToString(),
                     capacidad=Int32.Parse(dr["capacidad"].ToString()),
-                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
+                    estado= dr["estado"].ToString() 
                 };
                 listaResultado.Add(objeto);
             }
@@ -71,7 +72,7 @@ public class Cubiculo{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo FROM Cubiculos;";
+        string query= "SELECT idCubiculo, nombre, capacidad, EstadosCubiculo.estadoActual estado, tiempoMaximo FROM Cubiculos INNER JOIN EstadosCubiculo ON Cubiculos.idEstado = EstadosCubiculo.idEstado;";
         
 
         SqlCommand cmd = new SqlCommand(query,conectado);
@@ -82,7 +83,8 @@ public class Cubiculo{
                     IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
                     nombre= dr["nombre"].ToString(),
                     capacidad=Int32.Parse(dr["capacidad"].ToString()),
-                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
+                    estado= dr["estado"].ToString()
                 };
                 listaResultado.Add(objeto);
             }
