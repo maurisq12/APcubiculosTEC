@@ -32,11 +32,16 @@ public class Admin : Controller
         public IActionResult editEstudiante(){
         var estudianteEdit = Estudiante.todosEstudiantes()[Int32.Parse(Request.Query["id"])-1];
         Console.WriteLine(estudianteEdit.getNombre());
-        Console.WriteLine(estudianteEdit.correo);
+        Console.WriteLine(estudianteEdit.fechaNacimiento);
         ViewBag.Estudiante = estudianteEdit;
-
-
         return View();
     }
+
+        [HttpPost]
+        public void editEstudianteconf(){
+            Estudiante.editarEstudiante(Request.Form["elNombre"],Request.Form["elApellido1"],Request.Form["elApellido2"],Request.Form["laFecha"],Request.Form["elCorreo"],Request.Form["laContrasena"], Int16.Parse(Request.Form["elEstado"]));
+            //return View();
+
+        }
 
 }

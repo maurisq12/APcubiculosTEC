@@ -1,49 +1,56 @@
+@model CubiculosTEC.Models.Estudiante
 @{
     ViewData["Title"] = "edicion de estudiantes";
     Layout = "AdminLayout";
 }
 
 
+
 <div>
     <h1 class="display-4">Edición de estudiante</h1>
-
-    <form method="POST">
-
+    <form method="post" action="@Url.Action("editEstudianteconf", "Admin")">
+        <div class="edit-label">
+            <label style="font-size: 20px;">Correo electrónicos</label>
+            <div class="col-sm-6">
+                <input type="text" name="elCorreo" class="login-entry" value=@ViewBag.Estudiante.correo>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Contrasena</label>
+            <div class="col-sm-6">
+                <input type="text" name="laContrasena" class="login-entry" value=@ViewBag.Estudiante.contrasena>
+            </div>
+        </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Nombre</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" value=@ViewBag.Estudiante.nombre>
+                <input type="text" name="elNombre" class="login-entry" value=@ViewBag.Estudiante.nombre>
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Apellido 1</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" value=@ViewBag.Estudiante.apellido1>
+                <input type="text" name="elApellido1" class="login-entry" value=@ViewBag.Estudiante.apellido1>
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Apellido 2</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" value=@ViewBag.Estudiante.apellido2>
-            </div>
-        </div>
-        <div class="edit-label">
-            <label style="font-size: 20px;">Correo electronico</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" value=@ViewBag.Estudiante.correo>
-            </div>
-        </div>
-        <div class="edit-label">
-            <label style="font-size: 20px;">Correo electronico</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" value=@ViewBag.Estudiante.correo>
+                <input type="text" name="elApellido2" class="login-entry" value=@ViewBag.Estudiante.apellido2>
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Fecha de nacimiento @ViewBag.Estudiante.fechaNacimiento</label>
             <div class="col-sm-6">
-                <input class="form-entry" type="date" name="date" id="date" value="2020-01-02">
+                <input name="laFecha" class="login-entry" type="date" id="date" placeholder= "yyyy-mm-dd" value="2020-01-02">
             </div>
         </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Estado</label>
+            <div class="col-sm-6">
+                <input type="number" name="elEstado" class="login-entry" value=@ViewBag.Estudiante.estado>
+            </div>
+        </div>
+        <button style="align-self: center;" class="btn-accept" type="submit">Aplicar cambios</button>
     </form>
 </div>
