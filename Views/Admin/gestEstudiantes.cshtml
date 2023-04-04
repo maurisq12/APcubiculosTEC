@@ -3,14 +3,6 @@
     Layout = "AdminLayout";
 }
 
-<style> 
-    .editarBoton{
-    height:1px;
-    width:80px;
-    text-align: left;
-    line-height: 1px;
-}
-</style>
 
 <script>
 function buscar() {
@@ -42,11 +34,11 @@ function buscar() {
         <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
             <thead >
                 <tr style="background: #299CCB">
-                <th>Nombre</th>
-                <th>Carnet</th>
-                <th>Correo electrónico</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th style="color:white; font-size:110%">Nombre</th>
+                <th style="color:white; font-size:110%">Carnet</th>
+                <th style="color:white; font-size:110%">Correo electrónico</th>
+                <th style="color:white; font-size:110%">Estado</th>
+                <th style="color:white; font-size:110%">Acciones</th>
 
                 </tr>
 
@@ -59,7 +51,8 @@ function buscar() {
                     <td align="center" > 2023123456 </td>
                     <td align="center" > @unEstudiante.correo </td>
                     <td align="center" > @unEstudiante.estado </td>
-                    <td><button class="btn-select">Editar</button></td>
+                    <td><a style="text-decoration: none;padding: 6px;"
+                    href="/Admin/editEstudiante?id=@unEstudiante.id" class="btn-select">Editar</a></td>
                     </tr>
                 }
             </tbody>

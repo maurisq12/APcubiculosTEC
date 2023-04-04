@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "edicion de estudiantes";
+    Layout = "AdminLayout";
+}
+
+
+<div>
+    <h1 class="display-4">Edición de estudiante</h1>
+
+    <form method="POST">
+
+        <div class="edit-label">
+            <label style="font-size: 20px;">Nombre</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value=@ViewBag.Estudiante.nombre>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Apellido 1</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value=@ViewBag.Estudiante.apellido1>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Apellido 2</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value=@ViewBag.Estudiante.apellido2>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Correo electronico</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value=@ViewBag.Estudiante.correo>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Correo electronico</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value=@ViewBag.Estudiante.correo>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Fecha de nacimiento @ViewBag.Estudiante.fechaNacimiento</label>
+            <div class="col-sm-6">
+                <input class="form-entry" type="date" name="date" id="date" value="2020-01-02">
+            </div>
+        </div>
+    </form>
+</div>
