@@ -33,6 +33,7 @@ public class Admin : Controller
     }
         public IActionResult editEstudiante(){
         var estudianteEdit = Estudiante.todosEstudiantes()[Int32.Parse(Request.Query["id"])-1];
+        estudianteEdit.fechaNacimiento=DateTime.Parse(estudianteEdit.fechaNacimiento).ToString("yyyy-MM-dd");
         Console.WriteLine(estudianteEdit.getNombre());
         Console.WriteLine(estudianteEdit.fechaNacimiento);
         ViewBag.Estudiante = estudianteEdit;
