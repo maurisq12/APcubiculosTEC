@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CubiculosTEC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CubiculosTEC.Controllers;
 
+[Authorize(Roles="administrador")]
 public class Admin : Controller
 {
 

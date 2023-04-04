@@ -57,7 +57,7 @@ public class Cubiculo{
                     nombre= dr["nombre"].ToString(),
                     capacidad=Int32.Parse(dr["capacidad"].ToString()),
                     tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
-                    estado= dr["estado"].ToString() 
+                    //estado= dr["estado"].ToString() 
                 };
                 listaResultado.Add(objeto);
             }

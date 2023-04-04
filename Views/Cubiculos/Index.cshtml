@@ -2,21 +2,10 @@
     var todosCubiculos = ViewBag.Cubiculos;
 }
 
-<script>
-    function myFunction(e) {
-
-        if (confirm("Press a button!" + e)) {
-            txt = "You pressed OK!";
-            WriteLine(txt)
-        } else {
-            txt = "You pressed Cancel!";
-                        WriteLine(txt)
-
-        }
-    }
-
-
-</script>
+@{
+    ViewData["Title"] = "Reservación de cubículos";
+    Layout = "LayoutSimple";
+}
 
 
 <html lang="en">
@@ -33,7 +22,7 @@
 
 <body>
     <div class="cont-formulario">
-        <table style="margin-top: 60px; width: 50%;" class="table">
+        <table style="margin-top: 60px; width: 50%;" class="table table-hover row-clickable">
             <thead>
                 <tr style="background: #299CCB">
                     <th style="color:white; font-size:110%">Número de cubículo</th>
@@ -131,7 +120,7 @@
             <tbody>
                 @foreach (var unCubiculo in ViewBag.Cubiculos)
                 {
-                    <var>id</var>
+
                     <tr height="50" onclick="myFunction(\'' + @unCubiculo.getNombre() + '\')">
                         <td align="center" colspan="2"> @unCubiculo.getNombre() </td>
                         <td align="center" colspan="2"> @unCubiculo.getCapacidad() </td>
