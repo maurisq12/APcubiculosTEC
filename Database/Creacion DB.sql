@@ -69,6 +69,8 @@ CREATE TABLE [dbo].[Estudiantes](
 	[idEstudiante] [int] IDENTITY(1,1) NOT NULL,
 	[correo] [varchar](50) NOT NULL,
 	[contrasena] [varchar](50) NOT NULL,
+	[cedula] [int] NOT NULL,
+	[carne] [int] NOT NULL,
 	[nombre] [varchar](50) NOT NULL,
 	[apellido1] [varchar](50) NOT NULL,
 	[apellido2] [varchar](50) NOT NULL,
