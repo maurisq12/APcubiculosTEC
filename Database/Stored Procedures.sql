@@ -4,32 +4,32 @@ GO
 -- Estudiantes
 DROP PROCEDURE IF EXISTS dbo.agregarEstudiante
 GO
-CREATE PROCEDURE agregarEstudiante @correo varchar(50), @contrasena varchar(50), @nombre varchar(50),
-@apellido1 varchar(50), @apellido2 varchar(50), @fechaDeNacimiento date
+CREATE PROCEDURE agregarEstudiante @correo varchar(50), @contrasena varchar(50), @cedula int, @carne int,
+@nombre varchar(50), @apellido1 varchar(50), @apellido2 varchar(50), @fechaDeNacimiento date
 AS
-INSERT INTO dbo.Estudiantes (correo, contrasena, nombre, apellido1, apellido2, edad, fechaDeNacimiento, idEstadoEstudiante)
-VALUES (@correo, @contrasena, @nombre, @apellido1, @apellido2, DATEDIFF(year , @fechaDeNacimiento, GETDATE()),
+INSERT INTO dbo.Estudiantes (correo, contrasena, cedula, carne, nombre, apellido1, apellido2, edad, fechaDeNacimiento, idEstadoEstudiante)
+VALUES (@correo, @contrasena, @cedula, @carne, @nombre, @apellido1, @apellido2, DATEDIFF(year , @fechaDeNacimiento, GETDATE()),
 @fechaDeNacimiento, 1)
 GO
 
 
 DROP PROCEDURE IF EXISTS dbo.leerEstudiante
 GO
-CREATE PROCEDURE leerEstudiante @correo varchar(50)
+CREATE PROCEDURE leerEstudiante @idEstudiante int
 AS
-SELECT idEstudiante, correo, contrasena, nombre, apellido1, apellido2, edad, fechaDeNacimiento, idEstadoEstudiante
+SELECT idEstudiante, correo, contrasena, cedula, carne, nombre, apellido1, apellido2, edad, fechaDeNacimiento, idEstadoEstudiante
 FROM dbo.Estudiantes
-WHERE correo = @correo
+WHERE idEstudiante = @idEstudiante
 GO
 
 
 DROP PROCEDURE IF EXISTS dbo.modificarEstudiante
 GO
-CREATE PROCEDURE modificarEstudiante @correo varchar(50), @contrasena varchar(50), @nombre varchar(50),
-@apellido1 varchar(50), @apellido2 varchar(50), @fechaDeNacimiento date, @estado smallint
+CREATE PROCEDURE modificarEstudiante @correo varchar(50), @contrasena varchar(50), @cedula int, @carne int,
+@nombre varchar(50), @apellido1 varchar(50), @apellido2 varchar(50), @fechaDeNacimiento date, @estado smallint
 AS
 UPDATE dbo.Estudiantes SET
-contrasena = @contrasena, nombre = @nombre, apellido1 = @apellido1, apellido2 = @apellido2,
+contrasena = @contrasena, cedula = @cedula, carne = @carne, nombre = @nombre, apellido1 = @apellido1, apellido2 = @apellido2,
 edad = DATEDIFF(year , @fechaDeNacimiento, GETDATE()), fechaDeNacimiento = @fechaDeNacimiento,
 idEstadoEstudiante = @estado 
 WHERE
@@ -39,10 +39,10 @@ GO
 
 DROP PROCEDURE IF EXISTS dbo.eliminarEstudiante
 GO
-CREATE PROCEDURE eliminarEstudiante @correo varchar(50)
+CREATE PROCEDURE eliminarEstudiante @idEstudiante int
 AS
 DELETE FROM dbo.Estudiantes
-WHERE correo = @correo
+WHERE idEstudiante = @idEstudiante
 GO
 
 
@@ -60,32 +60,32 @@ GO
 
 DROP PROCEDURE IF EXISTS dbo.leerCubiculo
 GO
-CREATE PROCEDURE leerCubiculo @nombre varchar(50)
+CREATE PROCEDURE leerCubiculo @idCubiculo int
 AS
 SELECT idCubiculo, nombre, idEstado, capacidad, tiempoMaximo
 FROM dbo.Cubiculos
-WHERE nombre = @nombre
+WHERE idCubiculo = @idCubiculo
 GO
 
 
 DROP PROCEDURE IF EXISTS dbo.modificarCubiculo
 GO
-CREATE PROCEDURE modificarCubiculo @nombreOriginal varchar(50), @nombreNuevo varchar(50),
+CREATE PROCEDURE modificarCubiculo @idCubiculo int, @nombre varchar(50),
 @idEstado smallint, @capacidad int, @tiempoMaximo time(0)
 AS
 UPDATE dbo.Cubiculos SET
-nombre = @nombreNuevo, idEstado = @idEstado, capacidad = @capacidad, tiempoMaximo = @tiempoMaximo
+nombre = @nombre, idEstado = @idEstado, capacidad = @capacidad, tiempoMaximo = @tiempoMaximo
 WHERE
-nombre = @nombreOriginal
+idCubiculo = @idCubiculo
 GO
 
 
 DROP PROCEDURE IF EXISTS dbo.eliminarCubiculo
 GO
-CREATE PROCEDURE eliminarCubiculo @nombre varchar(50)
+CREATE PROCEDURE eliminarCubiculo @idCubiculo int
 AS
 DELETE FROM dbo.Cubiculos
-WHERE nombre = @nombre
+WHERE idCubiculo = @idCubiculo
 GO
 
 
@@ -104,12 +104,11 @@ GO
 
 DROP PROCEDURE IF EXISTS dbo.leerReservacion
 GO
-CREATE PROCEDURE leerReservacion @idCubiculo int, @idEstudiante int, @fechaDeUso date, @horaInicio time(0), @horaFinal time(0)
+CREATE PROCEDURE leerReservacion @idReservacion int
 AS
 SELECT idReservacion, idCubiculo, idEstudiante, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion
 FROM dbo.Reservaciones
-WHERE idCubiculo = @idCubiculo and idEstudiante = @idEstudiante and fechaDeUso = @fechaDeUso and horaInicio = @horaInicio and
-horaFinal = @horaFinal
+WHERE idReservacion = @idReservacion
 GO
 
 
@@ -130,13 +129,11 @@ GO
 
 DROP PROCEDURE IF EXISTS dbo.eliminarReservacion
 GO
-CREATE PROCEDURE eliminarReservacion @idCubiculo int, @idEstudiante int, @fechaDeUso date, @horaInicio time(0),
-@horaFinal time(0)
+CREATE PROCEDURE eliminarReservacion @idReservacion int
 AS
 DELETE FROM dbo.Reservaciones
 WHERE
-idCubiculo = @idCubiculo and idEstudiante = @idEstudiante and fechaDeUso = @fechaDeUso and horaInicio = @horaInicio and
-horaFinal = @horaFinal
+idReservacion = @idReservacion
 GO
 
 
