@@ -50,3 +50,13 @@ INSERT INTO dbo.ServiciosEspeciales (servicioEspecial)
 VALUES ('Impresora Fuse')
 
 SELECT * FROM dbo.ServiciosEspeciales
+
+
+
+-- "Estudiante" administrador (para bloquear cubiculos)
+
+INSERT INTO dbo.Estudiantes (correo, contrasena, cedula, carne, nombre, apellido1, apellido2, edad, fechaDeNacimiento, idEstadoEstudiante)
+VALUES ('', '', 0, 0, '', '', '', 0,
+'', 1)
+
+SELECT * FROM dbo.Estudiantes
