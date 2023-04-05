@@ -96,3 +96,10 @@ body {
   margin-top: 55px;
   max-width: 40%;
 }
+.filtro-dropdown{
+  background-color: #00487969;
+  border-radius: 7px;
+  font-size: 20px;
+  color: white;
+  border-color: #084e7d;
+}
