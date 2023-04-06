@@ -101,6 +101,8 @@ public class Reservacion{
                     idReservacion = Int32.Parse(dr["idReservacion"].ToString()),
                     idCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
                     idEstudiante=Int32.Parse(dr["idCubiculo"].ToString()),
+                    horaInicio=dr["horaInicio"].ToString(),
+                    horaFinal=dr["horaFinal"].ToString(),
                     horasUtilizado = (TimeSpan.Parse(dr["horaFinal"].ToString())-TimeSpan.Parse(dr["horaInicio"].ToString())).ToString(),
                     fechaDeUso=DateTime.Parse(dr["fechaDeUso"].ToString()).Date.ToShortDateString(),
                     fechaDeReservacion=DateTime.Parse(dr["fechaDeReservacion"].ToString()).Date.ToShortDateString(),

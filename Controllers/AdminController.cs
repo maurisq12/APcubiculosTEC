@@ -47,6 +47,7 @@ public class Admin : Controller
     public IActionResult editReserva(){
         var reservaEdit = Reservacion.todasReservaciones()[Int32.Parse(Request.Query["id"])-1];
         ViewBag.Reserva = reservaEdit;
+        Console.WriteLine(reservaEdit.horaInicio);
         return View();
     }
 

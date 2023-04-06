@@ -45,7 +45,7 @@ public class Cubiculo{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo FROM Cubiculos WHERE idEstado=1;";
+        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo, idEstado FROM Cubiculos WHERE idEstado=1;";
         
 
         SqlCommand cmd = new SqlCommand(query,conectado);
@@ -57,7 +57,7 @@ public class Cubiculo{
                     nombre= dr["nombre"].ToString(),
                     capacidad=Int32.Parse(dr["capacidad"].ToString()),
                     tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
-                    estado= dr["estado"].ToString() 
+                    estado= dr["idEstado"].ToString() 
                 };
                 listaResultado.Add(objeto);
             }
