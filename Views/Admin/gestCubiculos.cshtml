@@ -59,7 +59,8 @@ function buscar() {
                         <td align="center"> @unCubiculo.getNombre() </td>
                         <td align="center"> @unCubiculo.getCapacidad() </td>
                         <td align="center"> @unCubiculo.getEstado() </td>
-                        <td><button class="btn-select">Editar</button></td>
+                        <td><a style="text-decoration: none;padding: 6px;"
+                    href="/Admin/editCubiculo?id=@unCubiculo.getId()" class="btn-select">Editar</a></td>
                     </tr>
                 }
 

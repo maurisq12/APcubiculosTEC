@@ -57,7 +57,7 @@ public class Cubiculo{
                     nombre= dr["nombre"].ToString(),
                     capacidad=Int32.Parse(dr["capacidad"].ToString()),
                     tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
-                    //estado= dr["estado"].ToString() 
+                    estado= dr["estado"].ToString() 
                 };
                 listaResultado.Add(objeto);
             }
@@ -148,13 +148,14 @@ public class Cubiculo{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "editarCubiculo @idCubiculo, @pNombre, @pEstado, @pCapacidad;";
+        string query= "modificarCubiculo @idCubiculo, @pNombre, @pEstado, @pCapacidad, @pTiempoMáximo;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
         cmd.Parameters.AddWithValue("@pNombre",pNombre);
         cmd.Parameters.AddWithValue("@pEstado",pEstado);
         cmd.Parameters.AddWithValue("@pCapacidad",pCapacidad);
+        cmd.Parameters.AddWithValue("@pTiempoMáximo","00:00");
         
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){

@@ -1,0 +1,39 @@
+@model CubiculosTEC.Models.Reservacion
+@{
+    ViewData["Title"] = "Edicion de Reservacion";
+    Layout = "AdminLayout";
+}
+
+
+
+<div>
+    <h1 class="display-4">Edición de Reservacion</h1>
+    <form method="post" action="@Url.Action("editReservaconf", "Admin")">
+        <input type="hidden" name="elId" value="@ViewBag.Reserva.idReservacion">
+        <div class="edit-label">
+            <label style="font-size: 20px;">ID</label>
+            <div class="col-sm-6">
+                <input type="number" name="elNombre" class="login-entry" value=@ViewBag.Reserva.idReservacion>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Estudiante que reservó</label>
+            <div class="col-sm-6">
+                <input type="text" name="laCapacidad" class="login-entry" value=@ViewBag.Reserva.estudianteReservador>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Hora de inicio</label>
+            <div class="col-sm-6">
+                <input type="time" name="elEstado" class="login-entry" value=@ViewBag.Reserva.horaInicio>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Hora de fin</label>
+            <div class="col-sm-6">
+                <input type="time" name="elEstado" class="login-entry" value=@ViewBag.Reserva.horaFinal>
+            </div>
+        </div>
+        <button style="align-self: center;" class="btn-accept" type="submit">Aplicar cambios</button>
+    </form>
+</div>

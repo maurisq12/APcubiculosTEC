@@ -1,6 +1,6 @@
 @{
-    ViewData["Title"] = "Gestión de estudiantes";
-    Layout = "AdminLayout";
+    ViewData["Title"] = "Mis reservaciones";
+    Layout = "_Layout";
 }
 
 
@@ -27,27 +27,42 @@ function buscar() {
 </script>
 
 <div class="text-center">
-    <h1 class="display-4">Gestión de estudiantes</h1>
+    <h1 class="display-4">Mis reservaciones</h1>
 
     <div style="display: flex; flex-direction: column">
-        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar estudiante...">
+        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar reserva...">
         <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
             <thead >
                 <tr style="background: #299CCB">
-                <th style="color:white; font-size:110%">Nombre</th>
-                <th style="color:white; font-size:110%">Carnet</th>
-                <th style="color:white; font-size:110%">Correo electrónico</th>
-                <th style="color:white; font-size:110%">Estado</th>
-                <th style="color:white; font-size:110%">Acciones</th>
-
+                <th style="color:white; font-size:110%">Numero de reservacion</th>
+                <th style="color:white; font-size:110%">Cubículo</th>
+                <th style="color:white; font-size:110%">Fecha</th>
+                <th style="color:white; font-size:110%">Inicio</th>
+                <th style="color:white; font-size:110%">Salida</th>
+                <th style="color:white; font-size:110%">Confirmación</th>
                 </tr>
-
             </thead>
             <tbody>
                 @foreach (var unaReserva in ViewBag.Reservas)
                 {
                     <tr>
-                    <td align="center" > @unaReserva.id</td>
+                    <td align="center"> @unaReserva.idReservacion</td>
+                    <td align="center"> @unaReserva.nombreCubiculo</td>
+                    <td align="center"> @unaReserva.fechaDeReservacion</td>
+                    <td align="center"> @unaReserva.horaInicio</td>
+                    <td align="center"> @unaReserva.horaFinal</td>
+                    <script>
+                      if(@unaReserva.confirmacion=="True"){
+                        <td>
+                        <label> Confirmada </label>
+                        </td>
+                      else{
+                        <td>
+                        <label> Confirmadan't </label>
+                        </td>
+                      }
+                      }
+                    </script>
                     </tr>
                 }
             </tbody>

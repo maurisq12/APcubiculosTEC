@@ -9,13 +9,17 @@ public class Reservacion{
 
     public string estudianteReservador;
     public int idCubiculo;
-    public DateTime fechaDeUso;
-    public DateTime horaInicio;
-    public DateTime horaFinal;
-    public DateTime confirmacion;
-    public DateTime fechaDeReservacion;
+
+    public string nombreCubiculo;
+    public string fechaDeUso;
+    public string horaInicio;
+    public string horaFinal;
+    public string confirmacion;
+    public string fechaDeReservacion;
 
     public int idReservacion;
+
+    public string horasUtilizado;
 
 
 
@@ -30,7 +34,7 @@ public class Reservacion{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "SELECT idCubiculo, idEstudiante, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones WHERE idEstudiante=@pIdUsuario;";
+        string query= "SELECT Reservaciones.idCubiculo idCubiculo, Cubiculos.nombre nombreC, idEstudiante, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones INNER JOIN Cubiculos ON Reservaciones.idCubiculo = Cubiculos.idCubiculo WHERE idEstudiante=@pIdUsuario;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
 
@@ -39,8 +43,16 @@ public class Reservacion{
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
                 Reservacion objeto = new Reservacion(){
-                    idEstudiante=Int32.Parse(dr["idCubiculo"].ToString()),
-                    idCubiculo=Int32.Parse(dr["idEstudiante"].ToString()),
+                    idEstudiante=Int32.Parse(dr["idEstudiante"].ToString()),
+                    idCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
+                    idReservacion=Int32.Parse(dr["idReservacion"].ToString()),
+                    fechaDeUso=dr["fechaDeUso"].ToString(),
+                    horaInicio=dr["horaInicio"].ToString(),
+                    horaFinal=dr["horaInicio"].ToString(),
+                    confirmacion=dr["confirmacion"].ToString(),
+                    fechaDeReservacion=DateTime.Parse(dr["fechaDeUso"].ToString()).Date.ToShortDateString(),
+                    nombreCubiculo=dr["nombreC"].ToString(),
+
                 };
                 todasReservaciones.Add(objeto);
             }
@@ -79,20 +91,26 @@ public class Reservacion{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "SELECT idCubiculo, Estudiantes.Nombre, Estudiantes.apellido1,Estudiantes.apellido2, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones INNER JOIN Estudiantes ON Reservaciones.idEstudiante = Estudiantes.idEstudiante;";
+        string query= "SELECT idCubiculo, Estudiantes.idEstudiante idEstudiante,Estudiantes.nombre nombre, Estudiantes.apellido1 apellido1 ,Estudiantes.apellido2 apellido2, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones INNER JOIN Estudiantes ON Reservaciones.idEstudiante = Estudiantes.idEstudiante;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
                 Reservacion objeto = new Reservacion(){
+                    idReservacion = Int32.Parse(dr["idReservacion"].ToString()),
+                    idCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
                     idEstudiante=Int32.Parse(dr["idCubiculo"].ToString()),
-                    idCubiculo=Int32.Parse(dr["idEstudiante"].ToString()),
-                    estudianteReservador=dr["Estudiantes.Nombre"].ToString()+dr["Estudiantes.apellido1"].ToString()+dr["Estudiantes.apellido2"].ToString()
+                    horasUtilizado = (TimeSpan.Parse(dr["horaFinal"].ToString())-TimeSpan.Parse(dr["horaInicio"].ToString())).ToString(),
+                    fechaDeUso=DateTime.Parse(dr["fechaDeUso"].ToString()).Date.ToShortDateString(),
+                    fechaDeReservacion=DateTime.Parse(dr["fechaDeReservacion"].ToString()).Date.ToShortDateString(),
+                    estudianteReservador=dr["nombre"].ToString()+" "+dr["apellido1"].ToString()+" "+dr["apellido2"].ToString(),
+
                 };
                 todasReservaciones.Add(objeto);
             }
         }
+        
         conectado.Close();
         return todasReservaciones;
     }

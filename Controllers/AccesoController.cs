@@ -58,7 +58,7 @@ public class AccesoController : Controller{
 
 
 
-                return RedirectToAction("Index","Admin");
+                return RedirectToAction("gestEstudiantes","Admin");
                     
                 }
                 else{
