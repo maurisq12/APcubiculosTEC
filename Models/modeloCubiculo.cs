@@ -94,14 +94,16 @@ public class Cubiculo{
     }
 
 
-    public static Boolean reservarCubiculo(int pIdCubiculo, int pIdEstudiante, DateTime pFechaDeUso, DateTime pHoraInicio, DateTime pHoraFinal, DateTime pFechaDeReservacion){
+    public static Boolean reservarCubiculo(int pIdCubiculo, int pIdEstudiante, string pFechaDeUso, string pHoraInicio, string pHoraFinal, string pFechaDeReservacion){
 
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
         string query= "agregarReservacion @idCubiculo, @idEstudiante, @fechaDeUso, @horaInicio, @horaFinal, @fechaDeReservacion;";
+        Console.WriteLine("dos");
 
         SqlCommand cmd = new SqlCommand(query,conectado);
+        Console.WriteLine("tres");
         cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
         cmd.Parameters.AddWithValue("@idEstudiante",pIdEstudiante);
         cmd.Parameters.AddWithValue("@fechaDeUso",pFechaDeUso);
@@ -111,12 +113,7 @@ public class Cubiculo{
         
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
-                Cubiculo objeto = new Cubiculo(){
-                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
-                    nombre= dr["nombre"].ToString(),
-                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
-                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString())  
-                };
+                
             }
         }
         conectado.Close();

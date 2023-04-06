@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CubiculosTEC.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data.SqlClient;
+using System.Security.Claims;
 
 namespace CubiculosTEC.Controllers;
 
@@ -16,23 +17,15 @@ public class Reservas : Controller
         
     }
 
+    
+
     //SET: /Cubi/
     public IActionResult misReservaciones(){
-
-        
-
+        int pIdEstudiante = Int32.Parse(User.Claims.Where(x=> x.Type == ClaimTypes.NameIdentifier).SingleOrDefault().Value);
+        List<Reservacion> reservasEstudiante = Reservacion.reservacionesUsuario(pIdEstudiante);
+        ViewBag.Reservas =reservasEstudiante;
         return View();
-
-
-
-
-
-        /*
-        Models.CodigosQR miQR = new CodigosQR();
-        string elcodigo64 = miQR.crearCodigo();
-        string codigoListo = "data:image/png;charset=utf-8;base64,"+elcodigo64;
-        ViewData["Imagen"]= codigoListo;
-        return View();*/
+        
     }
 
     public string confirmando(){

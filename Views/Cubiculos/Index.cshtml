@@ -24,7 +24,7 @@
 function actualizarReserva(n,c,id) {
   document.getElementById("nombreCubiculo").innerHTML = n;
   document.getElementById("capacidadCubiculo").innerHTML = c;
-  document.getElementById("idCubiculo").innerHTML = id;
+  document.getElementById("idCubiculo").value = id;
 
 }
 
@@ -76,7 +76,6 @@ function filtrar() {
                     <tr onclick="actualizarReserva('@unCubiculo.getNombre()','@unCubiculo.getCapacidad()','@unCubiculo.getId()')">
                         <td> @unCubiculo.getNombre() </td>
                         <td align="center"> @unCubiculo.getCapacidad() </td>
-
                     </tr>
                 }
             </tbody>
@@ -94,12 +93,11 @@ function filtrar() {
                 <tr>
                     <td align="center">
                         <div>
-                            <form action=".." method="GET">
+                            <form method="POST" action="@Url.Action("reservar", "Cubiculos")">
                                 <label style="font-size:210% ;color: #084e7d" id="nombreCubiculo" align="center"></label><br>
                                 <label style="font-size:210%;color: #084e7d" align="center">Capacidad:</label>
                                 <label style="font-size:210%;color: #084e7d" id="capacidadCubiculo" align="center"></label><br>
-                                <input type="hidden" id="idCubiculo"></input><br>
-                                <input type="hidden" id="idEstudiante"></input>
+                                <input type="hidden" name="idCubiculoa" id="idCubiculo"></input><br>
                                 <div style="margin-bottom: 20px">
                                     <label for="date">Fecha de apartado: </label>
                                     <input class="form-entry" type="date" name="date" id="date" min="2023-21-03"
@@ -114,16 +112,28 @@ function filtrar() {
                                     <input class="form-entry" type="time" name="fin" id="fin" required>
                                 </div>
                                 <div style="margin-bottom: 20px">
-                                    <label for="servicio1">Servicio 1</label>
-                                    <input type="radio" name="servicio" id="servicio1" required>
+                                    <label for="servicio1">JAWS</label>
+                                    <input type="radio" name="servicio1" id="servicio1" required>
                                 </div>
                                 <div style="margin-bottom: 20px">
-                                    <label for="servicio2">Servicio 2</label>
-                                    <input type="radio" name="servicio" id="servicio2" required>
+                                    <label for="servicio2">NVDA 2</label>
+                                    <input type="radio" name="servicio2" id="servicio2" required>
                                 </div>
                                 <div style="margin-bottom: 20px">
-                                    <label for="servicio3">Servicio 3</label>
-                                    <input type="radio" name="servicio" id="servicio3" required>
+                                    <label for="servicio3">Lanbda 1.4</label>
+                                    <input type="radio" name="servicio3" id="servicio3" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="servicio3">Teclado especial</label>
+                                    <input type="radio" name="servicio3" id="servicio3" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="servicio3">Línea Braille</label>
+                                    <input type="radio" name="servicio3" id="servicio3" required>
+                                </div>
+                                <div style="margin-bottom: 20px">
+                                    <label for="servicio3">Impresora Fuse</label>
+                                    <input type="radio" name="servicio3" id="servicio3" required>
                                 </div>
                                 <button style="margin-bottom: 20px" type="submit" class="btn-accept">Reservar Cubículo</button>
                             </form>

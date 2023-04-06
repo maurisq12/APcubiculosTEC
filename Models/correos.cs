@@ -17,7 +17,7 @@ public class Correos{
         mensaje.To.Add(new MailAddress("maurisq@hotmail.com"));
         mensaje.Body = @"<html>
         <p>Gracias por confirmar la reservación del cubículo. Con el siguiente código QR puede acceder a este en horario de su reservación </p>
-        <img src= "+cuerpo+" width=\"300\" height=\"300\"/></html>";
+        <img src= "+cuerpo+"></html>";
         mensaje.IsBodyHtml = true;
 
         var smtpCliente = new SmtpClient("smtp-mail.outlook.com"){

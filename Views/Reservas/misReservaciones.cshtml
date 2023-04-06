@@ -1,17 +1,56 @@
 @{
-    ViewData["Title"] = "¡Confirmación completada!";
+    ViewData["Title"] = "Gestión de estudiantes";
+    Layout = "AdminLayout";
 }
-@{
-    var imagen = ViewData["Imagen"];
+
+
+<script>
+function buscar() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("busq");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tablaEstudiantes");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 }
-<div>
-    <h1>@ViewData["Title"]</h1>
+</script>
 
-    <p>Gracias por confirmar, con el siguiente código QR puede ingresar al cubículo </p>
+<div class="text-center">
+    <h1 class="display-4">Gestión de estudiantes</h1>
 
-    <img src= @imagen width="400" height="400"/>
+    <div style="display: flex; flex-direction: column">
+        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar estudiante...">
+        <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
+            <thead >
+                <tr style="background: #299CCB">
+                <th style="color:white; font-size:110%">Nombre</th>
+                <th style="color:white; font-size:110%">Carnet</th>
+                <th style="color:white; font-size:110%">Correo electrónico</th>
+                <th style="color:white; font-size:110%">Estado</th>
+                <th style="color:white; font-size:110%">Acciones</th>
 
-    
+                </tr>
 
-
+            </thead>
+            <tbody>
+                @foreach (var unaReserva in ViewBag.Reservas)
+                {
+                    <tr>
+                    <td align="center" > @unaReserva.id</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
