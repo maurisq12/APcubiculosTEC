@@ -1,7 +1,8 @@
 USE CubiculosTEC
 GO
 
--- Estudiantes
+-- ESTUDIANTES
+
 DROP PROCEDURE IF EXISTS dbo.agregarEstudiante
 GO
 CREATE PROCEDURE agregarEstudiante @correo varchar(50), @contrasena varchar(50), @cedula int, @carne int,
@@ -47,7 +48,7 @@ GO
 
 
 
--- Cubiculos
+-- CUBICULOS
 
 DROP PROCEDURE IF EXISTS dbo.crearCubiculo
 GO
@@ -89,8 +90,25 @@ WHERE idCubiculo = @idCubiculo
 GO
 
 
+-- filtrar cubiculos por fecha, hora de inicio y hora final
+DROP PROCEDURE IF EXISTS dbo.filtrarCubiculosFecha
+GO
+CREATE PROCEDURE filtrarCubiculosFecha @fecha date, @horaInicio time(0), @horaFinal time(0)
+AS
+SELECT Cubiculos.idCubiculo, nombre, idEstado, capacidad, tiempoMaximo
+FROM dbo.Cubiculos
+WHERE Cubiculos.idEstado = 1
+EXCEPT
+SELECT Cubiculos.idCubiculo, nombre, idEstado, capacidad, tiempoMaximo
+FROM dbo.Cubiculos
+INNER JOIN dbo.Reservaciones
+ON Reservaciones.idCubiculo = Cubiculos.idCubiculo
+WHERE Reservaciones.fechaDeUso = @fecha AND @horaFinal > Reservaciones.horaInicio AND @horaInicio < Reservaciones.horaFinal
+GO
 
--- Reservaciones
+
+
+-- RESERVACIONES
 
 DROP PROCEDURE IF EXISTS dbo.agregarReservacion
 GO
@@ -147,4 +165,16 @@ confirmacion = 1
 WHERE
 idCubiculo = @idCubiculo and idEstudiante = @idEstudiante and fechaDeUso = @fechaDeUso and horaInicio = @horaInicio and
 horaFinal = @horaFinal
+GO
+
+
+
+-- bloquear cubiculos (admin)
+DROP PROCEDURE IF EXISTS dbo.bloquearCubiculo
+GO
+CREATE PROCEDURE bloquearCubiculo @idCubiculo int, @fechaDeUso date, @horaInicio time(0), @horaFinal time(0),
+@fechaDeReservacion date
+AS
+EXEC dbo.agregarReservacion @idCubiculo = @idCubiculo, @idEstudiante = 1, @fechaDeUso = @fechaDeUso, @horaInicio = @horaInicio,
+@horaFinal = @horaFinal, @fechaDeReservacion = @fechaDeReservacion
 GO
