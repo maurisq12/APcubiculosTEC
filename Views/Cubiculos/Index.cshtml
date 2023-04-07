@@ -21,67 +21,93 @@
 </head>
 
 <script>
-function actualizarReserva(n,c,id) {
-  document.getElementById("nombreCubiculo").innerHTML = n;
-  document.getElementById("capacidadCubiculo").innerHTML = c;
-  document.getElementById("idCubiculo").value = id;
+    function actualizarReserva(n, c, id) {
+        document.getElementById("nombreCubiculo").innerHTML = n;
+        document.getElementById("capacidadCubiculo").innerHTML = c;
+        document.getElementById("idCubiculo").value = id;
 
-}
-
-function filtrar() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("busq");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tablaCubiculos");
-  tr = table.getElementsByTagName("tr");
-  
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
     }
-  }
-}
+
+    function filtrar() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("busq");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tablaCubiculos");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 </script>
 
 <body>
     <div class="cont-formulario">
-        <table id="tablaCubiculos" style="margin-top: 60px; width: 50%;" class="table table-hover row-clickable">
-            <thead>
-                <tr style="background: #299CCB">
-                    <th style="color:white; font-size:110%">Número de cubículo</th>
-                    <th style="color:white; font-size:110%;text-align: center;">
-                        Capacidad
-                        <select id="busq" onChange="filtrar()" class="table-filter filtro-dropdown">
-                            <option value=""></option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                        </select>
-                        
+        <div>
+            <div style="display: flex">
+
+                <form style="display: flex; padding: 11px;box-shadow: 3px 5px 7px;border-radius: 10px;" method="POST" action="@Url.Action("filtrarFecha", "Cubiculos")">
+
+                    <div style="margin-left: 20px;margin-bottom: 20px;display: flex;flex-direction: column;">
+                        <label for="date">Fecha </label>
+                        <input class="form-entry" type="date" name="filtroDate" id="date" min="2023-21-03" required>
+                    </div>
+                    <div style="margin-left: 20px;margin-bottom: 20px;display: flex;flex-direction: column;">
+                        <label for="inicio">Hora inicio </label>
+                        <input class="form-entry" type="time" name="filtroInicio" id="inicio" required>
+                    </div>
+                    <div style="margin-left: 20px;margin-bottom: 20px;display: flex;flex-direction: column;">
+                        <label for="fin">Hora fin </label>
+                        <input class="form-entry" type="time" name="filtroFin" id="fin" required>
+                    </div>
+                    <button style="margin-left: 20px;padding: 8px;" type="submit" class="btn-accept">Aplicar filtro</button>
+
+                </form>
+
+            </div>
+            <table id="tablaCubiculos" style="margin-top: 60px; height: 1%" class="table table-hover row-clickable">
+                <thead>
+                    <tr style="background: #299CCB">
+                        <th style="color:white; font-size:110%">Número de cubículo</th>
+                        <th style="color:white; font-size:110%;text-align: center;">
+                            Capacidad
+                            <select id="busq" onChange="filtrar()" class="table-filter filtro-dropdown">
+                                <option value=""></option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+
+                            </select>
+
                         </th>
 
-                </tr>
-
-            </thead>
-            <tbody>
-                @foreach (var unCubiculo in ViewBag.Cubiculos)
-                {
-                    <tr onclick="actualizarReserva('@unCubiculo.getNombre()','@unCubiculo.getCapacidad()','@unCubiculo.getId()')">
-                        <td> @unCubiculo.getNombre() </td>
-                        <td align="center"> @unCubiculo.getCapacidad() </td>
                     </tr>
-                }
-            </tbody>
 
-        </table>
-        <table style="width: 35%; position: relative; border: 2px solid #006194;">
+                </thead>
+                <tbody>
+                    @foreach (var unCubiculo in ViewBag.Cubiculos)
+                    {
+                        <tr
+                            onclick="actualizarReserva('@unCubiculo.getNombre()','@unCubiculo.getCapacidad()','@unCubiculo.getId()')">
+                            <td style="font-size:180%"> @unCubiculo.getNombre() </td>
+                            <td style="font-size:180%" align="center"> @unCubiculo.getCapacidad() </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <table style="width: 35%; position: relative; border: 1px solid #006194;">
             <thead>
                 <tr height="100" style="background-color: #299CCB;">
                     <td width="175" style="color:white; font-size:180%" align="center">¿Desea reservar este cubículo?
@@ -94,9 +120,11 @@ function filtrar() {
                     <td align="center">
                         <div>
                             <form method="POST" action="@Url.Action("reservar", "Cubiculos")">
-                                <label style="font-size:210% ;color: #084e7d" id="nombreCubiculo" align="center"></label><br>
+                                <label style="font-size:210% ;color: #084e7d" id="nombreCubiculo"
+                                    align="center"></label><br>
                                 <label style="font-size:210%;color: #084e7d" align="center">Capacidad:</label>
-                                <label style="font-size:210%;color: #084e7d" id="capacidadCubiculo" align="center"></label><br>
+                                <label style="font-size:210%;color: #084e7d" id="capacidadCubiculo"
+                                    align="center"></label><br>
                                 <input type="hidden" name="idCubiculoa" id="idCubiculo"></input><br>
                                 <div style="margin-bottom: 20px">
                                     <label for="date">Fecha de apartado: </label>
@@ -135,7 +163,8 @@ function filtrar() {
                                     <label for="servicio3">Impresora Fuse</label>
                                     <input type="radio" name="servicio3" id="servicio3" required>
                                 </div>
-                                <button style="margin-bottom: 20px" type="submit" class="btn-accept">Reservar Cubículo</button>
+                                <button style="margin-bottom: 20px" type="submit" class="btn-accept">Reservar
+                                    Cubículo</button>
                             </form>
                         </div>
                     </td>

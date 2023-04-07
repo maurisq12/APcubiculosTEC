@@ -14,12 +14,28 @@ public class Cubiculos : Controller
 
     public IActionResult Index(){
         var cubiculos= Cubiculo.cubiculosDisponibles();
-        Console.WriteLine(cubiculos[1].getId());
+
         ViewBag.Cubiculos = cubiculos;
+
         return View();
     }
 
     //SET: /Cubi/
+    public IActionResult filtrarFecha() {
+        var pHoraInicio =  Request.Form["filtroInicio"];
+        var pHoraFinal = Request.Form["filtroFin"];
+        var pFecha = Request.Form["filtroDate"];
+
+        Console.WriteLine(pHoraInicio);
+        Console.WriteLine(pHoraFinal);
+        Console.WriteLine(pFecha);
+        var cubiculos= Cubiculo.filtrarXFechaCubiculo(pFecha,pHoraInicio,pHoraFinal);
+
+        ViewBag.Cubiculos = cubiculos;
+
+        return View("Index");
+    
+    }
     [HttpPost]
     public IActionResult  reservar(){
         int pIdEstudiante = Int32.Parse(User.Claims.Where(x=> x.Type == ClaimTypes.NameIdentifier).SingleOrDefault().Value);

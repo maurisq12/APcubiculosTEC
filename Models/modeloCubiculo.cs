@@ -120,6 +120,35 @@ public class Cubiculo{
         return true;
     }
 
+    public static List<Cubiculo> filtrarXFechaCubiculo(string pFecha, string pHoraInicio, string pHoraFinal){
+        var listaResultado = new List<Cubiculo>();
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "filtrarCubiculosFecha  @fecha, @horaInicio, @horaFinal;";
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@fecha",pFecha);
+        cmd.Parameters.AddWithValue("@horaInicio",pHoraInicio);
+        cmd.Parameters.AddWithValue("@horaFinal",pHoraFinal);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                    Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
+                    nombre= dr["nombre"].ToString(),
+                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
+                    estado= "1"
+                };
+                listaResultado.Add(objeto);
+            }
+        }
+        conectado.Close();
+        return listaResultado;
+    }
+
     public static Boolean crearCubiculo(string pNombre, int pEstado, int pCapacidad){
 
         SQLConexion conex = new SQLConexion();
