@@ -8,24 +8,24 @@
 
 <div>
     <h1 class="display-4">Edición de Cubículo</h1>
-    <form method="post" action="@Url.Action("editCubiculoconf", "Admin")">
+    <form method="post" action="@Url.Action("editCubiculoconf", "Admin")" >
         <input type="hidden" name="elId" value="@ViewBag.Cubiculo.getId()">
         <div class="edit-label">
             <label style="font-size: 20px;">Nombre</label>
             <div class="col-sm-6">
-                <input type="text" name="elNombre" class="login-entry" value=@ViewBag.Cubiculo.getNombre()>
+                <input type="text" name="elNombre" class="login-entry" value="@ViewBag.Cubiculo.getNombre()">
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Capacidad</label>
             <div class="col-sm-6">
-                <input type="number" name="laCapacidad" class="login-entry" value=@ViewBag.Cubiculo.getCapacidad()>
+                <input type="number" name="laCapacidad" class="login-entry" value="@ViewBag.Cubiculo.getCapacidad()">
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Estado</label>
             <div class="col-sm-6">
-                <input type="number" name="elEstado" class="login-entry" value=@ViewBag.Cubiculo.getEstado()>
+                <input type="number" name="elEstado" class="login-entry" value="@ViewBag.Cubiculo.getEstado()">
             </div>
         </div>
         <button style="align-self: center;" class="btn-accept" type="submit">Aplicar cambios</button>

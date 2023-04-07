@@ -39,11 +39,11 @@ public class Cubiculos : Controller
     [HttpPost]
     public IActionResult  reservar(){
         int pIdEstudiante = Int32.Parse(User.Claims.Where(x=> x.Type == ClaimTypes.NameIdentifier).SingleOrDefault().Value);
-        var pFechaDeUso= DateTime.Now.ToString("yyyy-MM-dd");
+        var pFechaDeReservacion= DateTime.Now.ToString("yyyy-MM-dd");
         var pIdCubiculo = Request.Form["idCubiculoa"][0];
         var pHoraInicio =  Request.Form["inicio"];
         var pHoraFinal = Request.Form["fin"];
-        var pFechaDeReservacion = Request.Form["date"];
+        var pFechaDeUso = Request.Form["date"];
 
         Console.WriteLine(pIdEstudiante);
         Console.WriteLine(pFechaDeUso);
@@ -56,7 +56,6 @@ public class Cubiculos : Controller
 
         Cubiculo.reservarCubiculo(5,pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
 
-        Console.WriteLine("dos");
 
         //Console.WriteLine(pIdEstudiante);
         //Console.WriteLine(pHoraInicio);
@@ -71,7 +70,7 @@ public class Cubiculos : Controller
         }*/
 
 
-        return View("reservaria");
+        return View("Index");
     }
 
     

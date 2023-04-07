@@ -51,8 +51,12 @@ function buscar() {
                     <td align="center" > @unEstudiante.carne </td>
                     <td align="center" > @unEstudiante.correo </td>
                     <td align="center" > @unEstudiante.estado </td>
-                    <td><a style="text-decoration: none;padding: 6px;"
-                    href="/Admin/editEstudiante?id=@unEstudiante.id" class="btn-select">Editar</a></td>
+                    <td>
+                      <a style="text-decoration: none;padding: 6px;"
+                    href="/Admin/editEstudiante?id=@unEstudiante.id" class="btn-select">Editar</a>
+                    <a style="text-decoration: none;padding: 6px;"
+                    href="/Admin/asignacionesEstudiante?id=@unEstudiante.id" class="btn-select">Historial</a>
+                    </td>
                     </tr>
                 }
             </tbody>
