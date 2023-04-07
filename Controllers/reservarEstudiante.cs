@@ -23,11 +23,11 @@ public class Cubiculos : Controller
     [HttpPost]
     public IActionResult  reservar(){
         int pIdEstudiante = Int32.Parse(User.Claims.Where(x=> x.Type == ClaimTypes.NameIdentifier).SingleOrDefault().Value);
-        var pFechaDeUso= DateTime.Now.ToString("yyyy-MM-dd");
+        var pFechaDeReservacion= DateTime.Now.ToString("yyyy-MM-dd");
         var pIdCubiculo = Request.Form["idCubiculoa"][0];
         var pHoraInicio =  Request.Form["inicio"];
         var pHoraFinal = Request.Form["fin"];
-        var pFechaDeReservacion = Request.Form["date"];
+        var pFechaDeUso = Request.Form["date"];
 
         Console.WriteLine(pIdEstudiante);
         Console.WriteLine(pFechaDeUso);

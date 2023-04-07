@@ -35,7 +35,7 @@ public class Reservacion{
         SqlConnection conectado=  conex.establecer();
 
         string query= @"SELECT Cubiculos.idCubiculo,Cubiculos.nombre nombreC , Estudiantes.idEstudiante idEstudiante,Estudiantes.nombre nombre, Estudiantes.apellido1 apellido1 ,Estudiantes.apellido2 apellido2, fechaDeUso, horaInicio, horaFinal, confirmacion, fechaDeReservacion, idReservacion FROM Reservaciones INNER JOIN Estudiantes ON Reservaciones.idEstudiante = Estudiantes.idEstudiante 
-        INNER JOIN Cubiculos ON Reservaciones.idCubiculo = Cubiculos.idCubiculo;";
+        INNER JOIN Cubiculos ON Reservaciones.idCubiculo = Cubiculos.idCubiculo WHERE Reservaciones.idEstudiante = @pIdUsuario;";
         SqlCommand cmd = new SqlCommand(query,conectado);
 
         cmd.Parameters.AddWithValue("@pIdUsuario",pIdUsuario);

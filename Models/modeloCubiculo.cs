@@ -39,6 +39,14 @@ public class Cubiculo{
         return capacidad;
     }
 
+    public int getTiempoMaximo(){
+        return capacidad;
+    }
+
+    
+
+
+
     public static List<Cubiculo> cubiculosDisponibles(){
         var listaResultado = new List<Cubiculo>();
 

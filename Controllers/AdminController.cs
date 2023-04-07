@@ -9,9 +9,6 @@ namespace CubiculosTEC.Controllers;
 public class Admin : Controller
 {
 
-    
-
-
     //SET: /Cubi/
     public IActionResult gestEstudiantes(){
         var estudiantes = Estudiante.todosEstudiantes();
@@ -29,8 +26,13 @@ public class Admin : Controller
         return View();
     }
     public IActionResult gestTiempos(){
+        var cubiculos = Cubiculo.cubiculosTodos();
+        ViewBag.Cubiculos = cubiculos;
         return View();
     }
+
+
+
     public IActionResult editEstudiante(){
         var estudianteEdit = Estudiante.todosEstudiantes()[Int32.Parse(Request.Query["id"])-2];
         estudianteEdit.fechaNacimiento=DateTime.Parse(estudianteEdit.fechaNacimiento).ToString("yyyy-MM-dd");
@@ -74,12 +76,13 @@ public class Admin : Controller
 
     public IActionResult asignacionesEstudiante(){
         var asignaciones = Reservacion.reservacionesUsuario(Int32.Parse(Request.Query["id"]));
+        Console.WriteLine(asignaciones.Count());
         ViewBag.Reservas = asignaciones;
         return View();
     }
 
     public IActionResult realizarBloqueo(){
-        Cubiculo.bloqueoCubiculo(Int32.Parse(Request.Form["elIdCubiculo"]),Request.Form["laFechaDeUso"],Request.Form["laHoraInicio"],Request.Form["laHoraFinal"],Request.Form["laFechaDeReserva"]);
+        Cubiculo.bloqueoCubiculo(Int32.Parse(Request.Form["elIdCubiculo"]),Request.Form["laFechaDeUso"],Request.Form["laHoraInicio"],Request.Form["laHoraFinal"],DateTime.Now.ToString("yyyy-MM-dd"));
         return View();
     }
 
@@ -88,6 +91,16 @@ public class Admin : Controller
         return View();
     }
 
+    public IActionResult gestCubiculoTiempo(){
+        var cubiculoGest = Cubiculo.cubiculosTodos()[Int32.Parse(Request.Query["id"])-1];
+        ViewBag.Cubiculo = cubiculoGest;
+        return View();
+    }
+
+    public IActionResult cambiarEstado(){
+        Cubiculo.cambiarEstadoCubiculo(Int32.Parse(Request.Query["id"]), Int32.Parse(Request.Form["elEstado"]));
+        return View();
+    }
     
 
 
