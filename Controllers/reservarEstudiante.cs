@@ -40,7 +40,6 @@ public class Cubiculos : Controller
 
         Cubiculo.reservarCubiculo(5,pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
 
-        Console.WriteLine("dos");
 
         //Console.WriteLine(pIdEstudiante);
         //Console.WriteLine(pHoraInicio);
@@ -55,7 +54,7 @@ public class Cubiculos : Controller
         }*/
 
 
-        return View("reservaria");
+        return View("Index");
     }
 
     
