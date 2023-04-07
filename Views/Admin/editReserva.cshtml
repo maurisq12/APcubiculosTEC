@@ -11,27 +11,48 @@
     <form method="post" action="@Url.Action("editReservaconf", "Admin")">
         <input type="hidden" name="elId" value="@ViewBag.Reserva.idReservacion">
         <div class="edit-label">
-            <label style="font-size: 20px;">ID</label>
+            <label style="font-size: 20px;">ID de la reserva:      @ViewBag.Reserva.idReservacion</label>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">ID Estudiante que reservó</label>
             <div class="col-sm-6">
-                <input type="number" name="elNombre" class="login-entry" value=@ViewBag.Reserva.idReservacion>
+                <input type="number" name="elIdEstudiante" class="login-entry" value=@ViewBag.Reserva.idEstudiante>
             </div>
         </div>
         <div class="edit-label">
-            <label style="font-size: 20px;">Estudiante que reservó</label>
+            <label style="font-size: 20px;">ID del cubículo</label>
             <div class="col-sm-6">
-                <input type="text" name="laCapacidad" class="login-entry" value=@ViewBag.Reserva.estudianteReservador>
+                <input type="text" name="elIdCubiculo" class="login-entry" value=@ViewBag.Reserva.idCubiculo>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Fecha de uso</label>
+            <div class="col-sm-6">
+                <input type="date" name="laFechaDeUso" class="login-entry" value=@ViewBag.Reserva.fechaDeUso>
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Hora de inicio</label>
             <div class="col-sm-6">
-                <input type="time" name="elEstado" class="login-entry" value=@ViewBag.Reserva.horaInicio>
+                <input type="time" name="laHoraInicio" class="login-entry" value=@ViewBag.Reserva.horaInicio>
             </div>
         </div>
         <div class="edit-label">
             <label style="font-size: 20px;">Hora de fin</label>
             <div class="col-sm-6">
-                <input type="time" name="elEstado" class="login-entry" value=@ViewBag.Reserva.horaFinal>
+                <input type="time" name="laHoraFinal" class="login-entry" value=@ViewBag.Reserva.horaFinal>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Fecha de reserva</label>
+            <div class="col-sm-6">
+                <input type="date" name="laFechaDeReserva" class="login-entry" value=@ViewBag.Reserva.fechaDeReservacion>
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Confirmación</label>
+            <div class="col-sm-6">
+                <input type="text" name="laConfirmacion" class="login-entry" value=@ViewBag.Reserva.confirmacion>
             </div>
         </div>
         <button style="align-self: center;" class="btn-accept" type="submit">Aplicar cambios</button>

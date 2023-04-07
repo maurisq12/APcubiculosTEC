@@ -211,37 +211,34 @@ public class Cubiculo{
         return true;
     }
 
-    public static Boolean bloqueoCubiculo(int pIdCubiculo, DateTime pFechaInicio, DateTime pFechaFin, DateTime pHoraInicio, DateTime pHoraFin ){
+    public static Boolean bloqueoCubiculo(int pIdCubiculo, string pFechaDeUso , string pHoraInicio, string pHoraFinal, string pFechaDeReservacion){
 
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "cambiarEstadoCubiculo @idCubiculo, @pFechaInicio, @pFechaFin, @pHoraInicio, @pHoraFin;";
+        string query= "bloquearCubiculo @idCubiculo, @pFechaInicio, @pFechaFin, @pHoraInicio, @pHoraFin;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
-        cmd.Parameters.AddWithValue("@pFechaInicio",pFechaInicio);
-        cmd.Parameters.AddWithValue("@pFechaFin",pFechaFin);
+        cmd.Parameters.AddWithValue("@pFechaDeUso",pFechaDeUso);
         cmd.Parameters.AddWithValue("@pHoraInicio",pHoraInicio);
-        cmd.Parameters.AddWithValue("@pHoraFin",pHoraFin);
+        cmd.Parameters.AddWithValue("@pHoraFinal",pHoraFinal);
+        cmd.Parameters.AddWithValue("@pHoraDeReservacion",pFechaDeReservacion);
         
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
-                Cubiculo objeto = new Cubiculo(){
-                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
-                };
             }
         }
         conectado.Close();
         return true;
     }
 
-    public static Boolean tiempoMaximoCubiculo(int pIdCubiculo, DateTime pMaximo){
+    public static Boolean tiempoMaximoCubiculo(int pIdCubiculo, string pMaximo){
 
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "tiempoMaximoCubiculo @idCubiculo, @pMaximo;";
+        string query= "definirHoraMaxima @idCubiculo, @pMaximo;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
@@ -249,9 +246,6 @@ public class Cubiculo{
         
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
-                Cubiculo objeto = new Cubiculo(){
-                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString())
-                };
             }
         }
         conectado.Close();
