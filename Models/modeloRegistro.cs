@@ -10,7 +10,7 @@ public class Registro{
     public string cedula {get;set;}
 
     [Required (ErrorMessage ="Escriba un número de carné")]
-    [RegularExpression(@"\d",ErrorMessage ="Escriba una cédula válida.")]
+    [RegularExpression(@"\d{8,10}",ErrorMessage ="Escriba una un carné válido.")]
     public string carne {get;set;}
 
     [Required (ErrorMessage ="Escriba un nombre")]
@@ -22,12 +22,12 @@ public class Registro{
     [Required (ErrorMessage ="Escriba un apellido")]
     public string apellido2 {get;set;}
 
-    [Required (ErrorMessage ="Escriba dígitos")]
+    /*[Required (ErrorMessage ="Escriba dígitos")]
     [RegularExpression(@"\d{2}",ErrorMessage ="Escriba una edad válida.")]
-    public string edad {get;set;}
+    public string edad {get;set;}*/
 
-    [Required (ErrorMessage ="Proporcione su fecha de nacimiento")]
-    public DateTime fechaNacimiento {get;set;}
+    public string? fechaNacimiento {get;set;}
+    
 
     [Required (ErrorMessage ="Proporcione un correo.")]
     [RegularExpression(@"[a-z0-9]+@+(estudiantec.cr|itcr.ac.cr)",ErrorMessage ="Introduzca un correo institucional válido.")]

@@ -90,6 +90,12 @@ body {
   -webkit-text-fill-color: white;
 }
 
+.btn-delete{
+  border-radius: 10px 10px 10px 10px;
+  background-color: #bb1a42;
+  -webkit-text-fill-color: white;
+}
+
 .edit-label{
   display: flex;
   justify-content: space-between;

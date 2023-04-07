@@ -32,6 +32,16 @@ function buscar() {
     }
   }
 }
+
+function eliminar(){
+  if(confirm ("¿Desea eliminar el cubículo?")== true){
+    //@Url.Action("eliminarCubiculo","Admin");
+    console.log("no");
+  }
+  else{
+
+  }
+}
 </script>
 
 <div class="text-center">
@@ -60,7 +70,8 @@ function buscar() {
                         <td align="center"> @unCubiculo.getCapacidad() </td>
                         <td align="center"> @unCubiculo.getEstado() </td>
                         <td><a style="text-decoration: none;padding: 6px;"
-                    href="/Admin/editCubiculo?id=@unCubiculo.getId()" class="btn-select">Editar</a></td>
+                    href="/Admin/editCubiculo?id=@unCubiculo.getId()" class="btn-select">Editar</a>
+                    <button class="btn-delete" onclick="eliminar()">Eliminar</td>
                     </tr>
                 }
 

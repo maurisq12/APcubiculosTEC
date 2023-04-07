@@ -12,21 +12,22 @@ public class Registro : Controller{
     [HttpPost]
     public IActionResult Index(CubiculosTEC.Models.Registro objeto)
     {
+        Console.WriteLine(Request.Form["laFechaNacimiento"]);
+        objeto.fechaNacimiento= Request.Form["laFechaNacimiento"];
         if(ModelState.IsValid){
-            Console.WriteLine("oeoeoeoe");
-
-
-            /*
             if(new LO_Usuario().verificarCorreo(objeto.correo)){
                 new LO_Usuario().nuevoUsuario(objeto);
-                //falta el if de estudiante o administrador
-                return RedirectToAction("Index","Home");
+                new Correos().correoRegistro(objeto);
+                return RedirectToAction("Index","Acesso");
             }
         
             else{
                 ModelState.AddModelError("Custom Error","Ya existe un usuario registrado con este correo");
                 return View();
-            } */
+            }
+        }
+        else{
+            Console.WriteLine("error de datos");
         }
 
         return View();

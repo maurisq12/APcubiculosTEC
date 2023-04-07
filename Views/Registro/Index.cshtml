@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
 	<style>
 		input::-webkit-outer-spin-button,
@@ -49,6 +50,8 @@
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div><br>
 
+							
+
 							<div class="wrap-input100 validate-input" data-validate="Numero de carne">
 								<h3 style="font-size: 20px;">Número de carné</h3><br>
 								<h3>@Html.TextBoxFor(m => m.carne, new {@class="login-entry"})</h3>
@@ -79,20 +82,10 @@
 						</div>
 						<div style="display: flex;flex-direction: column">
 
-							<div class="wrap-input100 validate-input" data-validate="edad">
-								<h3 style="font-size: 20px;">Edad</h3><br>
-								<h3>@Html.TextBoxFor(m => m.edad, new {@class="login-entry"})</h3>
-								<h3>@Html.ValidationMessageFor(m => m.edad,"", new {@class="error"})</h3>
-								<span class="focus-input100" data-placeholder="&#xf191;"></span>
-							</div><br>
-
 							<div class="wrap-input100 validate-input" data-validate="Fecha de nacimiento">
 								<h3 style="font-size: 20px;">Fecha de nacimiento</h3><br>
-								<h3>@Html.TextBoxFor(m => m.fechaNacimiento, new {@class="login-entry"})</h3>
-								<h3>@Html.ValidationMessageFor(m => m.fechaNacimiento,null, new {@class="error"})</h3>
-								<span class="focus-input100" data-placeholder="&#xf191;"></span>
-							</div><br>
-
+								<input class="login-entry" type="date" name= "laFechaNacimiento" value="2000-01-01">
+							</div><br>							
 
 							<div class="wrap-input100 validate-input" data-validate="Enter email">
 								<h3 style="font-size: 20px;">Correo electrónico</h3><br>
@@ -108,7 +101,7 @@
 								<h3>@Html.ValidationMessageFor(m => m.contrasena,"", new {@class="error"})
 								<br>Debe contener:
 								<br>-Mínimo 8 caracteres.
-								<br>-Al menos una letra mayúscula./n
+								<br>-Al menos una letra mayúscula.
 								<br>-Al menos una letra minúscula.
 								<br>-Al menos un símbolo especial.</h3><br><br>
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>

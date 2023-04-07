@@ -101,6 +101,10 @@ public class Admin : Controller
         Cubiculo.cambiarEstadoCubiculo(Int32.Parse(Request.Query["id"]), Int32.Parse(Request.Form["elEstado"]));
         return View();
     }
+
+    public string eliminarCubiculo(){
+        return "eliminado";
+    }
     
 
 

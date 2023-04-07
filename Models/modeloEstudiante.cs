@@ -118,6 +118,7 @@ public class Estudiante{
             }
         }
         conectado.Close();
+        Console.WriteLine("deberia");
         return true;
     }
 

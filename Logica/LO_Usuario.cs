@@ -42,7 +42,7 @@ public class LO_Usuario{
 
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
-        string query= "SELECT Nombre, correo,contrasena,rol FROM Usuarios WHERE correo=@pCorreo";
+        string query= "SELECT Nombre, correo,contrasena FROM Estudiantes WHERE correo=@pCorreo";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         cmd.Parameters.AddWithValue("@pCorreo",pCorreo);
@@ -66,28 +66,26 @@ public class LO_Usuario{
     public bool nuevoUsuario(Registro pUsuario){
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
-        string query= "sp";
+
+        string query= "agregarEstudiante @pCorreo, @pContrasena, @pCedula, @pCarne, @pNombre, @pApellido1, @pApellido2, @pFechaNacimiento";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
-        cmd.CommandType = CommandType.StoredProcedure;
-        cmd.Parameters.AddWithValue("@pCedula",pUsuario.cedula);
-        cmd.Parameters.AddWithValue("@pCarne",pUsuario.carne);
+        cmd.Parameters.AddWithValue("@pCedula",Int32.Parse(pUsuario.cedula));
+        cmd.Parameters.AddWithValue("@pCarne",Int32.Parse(pUsuario.carne));
         cmd.Parameters.AddWithValue("@pNombre",pUsuario.nombre);
         cmd.Parameters.AddWithValue("@pApellido1",pUsuario.apellido1);
         cmd.Parameters.AddWithValue("@pApellido2",pUsuario.apellido2);
-        cmd.Parameters.AddWithValue("@pEdad",pUsuario.edad);
-        cmd.Parameters.AddWithValue("@pFecha",pUsuario.fechaNacimiento);
+        cmd.Parameters.AddWithValue("@pFechaNacimiento",pUsuario.fechaNacimiento);
         cmd.Parameters.AddWithValue("@pCorreo",pUsuario.correo);
         cmd.Parameters.AddWithValue("@pContrasena",pUsuario.contrasena);
 
 
-        if (conectado.State != ConnectionState.Open){
-            conectado.Close();
-            conectado.Open();
-        }
+        
         using (SqlDataReader dr = cmd.ExecuteReader()){
-            return true;
+            
         }
+        conectado.Close();
+        return true;
     }
 
     public Estudiante encontrarEstudiante(string pCorreo, string pContrasena){
