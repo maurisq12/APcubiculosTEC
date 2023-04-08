@@ -81,13 +81,20 @@ public class Admin : Controller
         return View();
     }
 
+    [HttpPost]
     public IActionResult realizarBloqueo(){
-        Cubiculo.bloqueoCubiculo(Int32.Parse(Request.Form["elIdCubiculo"]),Request.Form["laFechaDeUso"],Request.Form["laHoraInicio"],Request.Form["laHoraFinal"],DateTime.Now.ToString("yyyy-MM-dd"));
+        Cubiculo.bloqueoCubiculo(Int32.Parse(Request.Form["elId"]),Request.Form["laFechaDeUso"].ToString(),Request.Form["laHoraInicio"].ToString(),Request.Form["laHoraFinal"].ToString(),DateTime.Now.ToString("yyyy-MM-dd"));
+        Console.WriteLine(Request.Form["laHoraInicio"].ToString());
+        Console.WriteLine(Request.Form["laHoraFinal"].ToString());
         return View();
     }
 
+
+    [HttpPost]
     public IActionResult definirHoraMaxima(){
-        Cubiculo.tiempoMaximoCubiculo(Int32.Parse(Request.Form["elIdCubiculo"]),Request.Form["elTiempoMaximo"]);
+        Cubiculo.tiempoMaximoCubiculo(Int32.Parse(Request.Form["elId"]),Request.Form["elTiempoMaximo"].ToString());
+        Console.WriteLine(Int32.Parse(Request.Form["elId"]));
+        Console.WriteLine(Request.Form["eltiempoMaximo"].ToString());
         return View();
     }
 
@@ -97,6 +104,7 @@ public class Admin : Controller
         return View();
     }
 
+    [HttpPost]
     public IActionResult cambiarEstado(){
         Console.WriteLine(Int32.Parse(Request.Form["elEstado"]));
         int elEstado = Int32.Parse(Request.Form["elEstado"]);

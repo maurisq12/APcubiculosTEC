@@ -252,14 +252,14 @@ public class Cubiculo{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "bloquearCubiculo @idCubiculo, @pFechaInicio, @pFechaFin, @pHoraInicio, @pHoraFin;";
+        string query= "bloquearCubiculo @idCubiculo, @pFechaDeUso, @pHoraInicio, @pHoraFinal, @pFechaDeReservacion;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         cmd.Parameters.AddWithValue("@idCubiculo",pIdCubiculo);
         cmd.Parameters.AddWithValue("@pFechaDeUso",pFechaDeUso);
         cmd.Parameters.AddWithValue("@pHoraInicio",pHoraInicio);
         cmd.Parameters.AddWithValue("@pHoraFinal",pHoraFinal);
-        cmd.Parameters.AddWithValue("@pHoraDeReservacion",pFechaDeReservacion);
+        cmd.Parameters.AddWithValue("@pFechaDeReservacion",pFechaDeReservacion);
         
         using (SqlDataReader dr = cmd.ExecuteReader()){
             while(dr.Read()){
