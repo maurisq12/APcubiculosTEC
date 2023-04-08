@@ -60,7 +60,10 @@
         <div class="edit-label">
             <label style="font-size: 20px;">Estado</label>
             <div class="col-sm-6">
-                <input type="number" name="elEstado" class="login-entry" value="@ViewBag.Estudiante.estado">
+                <select class="login-entry" name="elEstado">
+                    <option value="1" >Activo</option>
+                    <option value="2" >Suspendido </option>
+                </select>
             </div>
         </div>
         <button style="align-self: center;" class="btn-accept" type="submit">Aplicar cambios</button>

@@ -52,7 +52,10 @@
         <div class="edit-label">
             <label style="font-size: 20px;">Confirmación</label>
             <div class="col-sm-6">
-                <input type="text" name="laConfirmacion" class="login-entry" value=@ViewBag.Reserva.confirmacion>
+                <select class="login-entry" name="elEstado">
+                    <option value="True" >Confirmada </option>
+                    <option value="False" >Sin confirmar </option>
+                </select>
             </div>
         </div>
         <button style="align-self: center;" class="btn-accept" type="submit">Aplicar cambios</button>

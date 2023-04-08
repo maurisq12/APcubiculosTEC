@@ -14,7 +14,11 @@
         <div class="edit-label">
             <label style="font-size: 20px;">Estado</label>
             <div class="col-sm-6">
-                <input type="text" name="elNombre" class="login-entry" value="@ViewBag.Cubiculo.getEstado()">
+                <select class="login-entry" name="elEstado">
+                    <option value="1" >Libre </option>
+                    <option value="2" >Ocupado </option>
+                    <option value="3" >En mantenimiento </option>
+                </select>
             </div>
         </div>
         <button style="align-self: center;" class="btn-accept" type="submit">Cambiar estado</button>
@@ -24,18 +28,17 @@
         <div class="edit-label">
             <label style="font-size: 20px;">Tiempo máximo</label>
             <div class="col-sm-6">
-                <input type="time" name="laCapacidad" class="login-entry" value="@ViewBag.Cubiculo.getTiempoMaximo()">
+                <input type="time" name="eltiempoMaximo" class="login-entry" value="@ViewBag.Cubiculo.getTiempoMaximo()">
             </div>
         </div>
         <button style="align-self: center;" class="btn-accept" type="submit">Aplicar tiempo máximo</button>
     </form>
     <form method="post" action="@Url.Action("realizarBloqueo", "Admin")" >
         <input type="hidden" name="elId" value="@ViewBag.Cubiculo.getId()">
-
         <div class="edit-label">
             <label style="font-size: 20px;">Fecha del bloqueo</label>
             <div class="col-sm-6">
-                <input type="date" name="laHoraInicio" class="login-entry" value="">
+                <input type="date" name="laFechaDeUso" class="login-entry" value="">
             </div>
         </div>
         <div class="edit-label">
