@@ -9,21 +9,33 @@ public class Correos{
     string correoAuten = "cubiculosTEC@outlook.com";
     string contraAuten = "proyectoap123";
 
-    public string enviarCorreo(string cuerpo){
+    public string enviarCorreo(byte[] imagen1, byte[] pdfBytes){
 
-        MailMessage mensaje = new MailMessage();
+       MailMessage mensaje = new MailMessage();
         mensaje.From = new MailAddress(correoAuten);
         mensaje.Subject = "Confirmación de cubículo - CubículosTEC";
-        mensaje.To.Add(new MailAddress("maurisq@hotmail.com"));
+        mensaje.To.Add(new MailAddress("agfp108@gmail.com"));
         mensaje.Body = @"<html>
-        <p>Gracias por confirmar la reservación del cubículo. Con el siguiente código QR puede acceder a este en horario de su reservación </p>
-        <img src= "+cuerpo+"></html>";
+        <p>Gracias por confirmar la reservación del cubículo. Se adjunta un PDF con la información del cubículo y un código QR podrá acceder a el cubículo reservado. </p>
+        </html>";
         mensaje.IsBodyHtml = true;
+
+        //Se adjunta Codigo QR
+        MemoryStream qrStream = new MemoryStream(imagen1);
+        qrStream.Position = 0;
+        mensaje.Attachments.Add(new Attachment(qrStream,"codigo-qr.png"));
+
+        // Adjunta el PDF al correo
+        var pdfStream = new MemoryStream(pdfBytes);
+        pdfStream.Position = 0;
+        mensaje.Attachments.Add(new Attachment(pdfStream, "datos-cubiculo.pdf"));
+
 
         var smtpCliente = new SmtpClient("smtp-mail.outlook.com"){
             Port=587,
             Credentials = new NetworkCredential(correoAuten,contraAuten),
             EnableSsl=true,
+
         };
 
         smtpCliente.Send(mensaje);

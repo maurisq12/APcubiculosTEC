@@ -1,23 +1,24 @@
 using QRCoder;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace CubiculosTEC.Models;
 
+using System.Drawing;
+
+
 public class CodigosQR{
-    public  string crearCodigo(){
+    public byte[] crearCodigo(string informacion){
 
-    QRCodeGenerator qrGenerador = new QRCodeGenerator();
-    QRCodeData qrCodeData = qrGenerador.CreateQrCode("Un saludito para mi amigo Retex28", QRCodeGenerator.ECCLevel.Q);
+        QRCodeGenerator qrGenerator = new QRCodeGenerator(); 
+        QRCodeData qrCodeData = qrGenerator.CreateQrCode(informacion, QRCodeGenerator.ECCLevel.Q);
+        BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
+        byte[] qrCodeAsBitmapByteArr = qrCode.GetGraphic(20);
 
-
+        return qrCodeAsBitmapByteArr;
     
-    BitmapByteQRCode bitmapByteQRCode = new BitmapByteQRCode(qrCodeData);
-    var bitMap = bitmapByteQRCode.GetGraphic(20);
 
-    using var ms = new MemoryStream();
-    ms.Write(bitMap);
-    byte [] byteImage = ms.ToArray();
-    return Convert.ToBase64String(byteImage);
-    
+
     }
+
 }

@@ -38,24 +38,40 @@ public class Cubiculos : Controller
     }
     [HttpPost]
     public IActionResult  reservar(){
+        // Parseo de los datos
         int pIdEstudiante = Int32.Parse(User.Claims.Where(x=> x.Type == ClaimTypes.NameIdentifier).SingleOrDefault().Value);
-        var pFechaDeReservacion= DateTime.Now.ToString("yyyy-MM-dd");
+        var pFechaDeReservacion = DateTime.Now.ToString("yyyy-MM-dd");
         var pIdCubiculo = Request.Form["idCubiculoa"][0];
         var pHoraInicio =  Request.Form["inicio"];
         var pHoraFinal = Request.Form["fin"];
         var pFechaDeUso = Request.Form["date"];
 
-        Console.WriteLine(pIdEstudiante);
-        Console.WriteLine(pFechaDeUso);
-        Console.WriteLine(pIdCubiculo);
-        Console.WriteLine(pHoraInicio);
-        Console.WriteLine(pHoraFinal);
-        Console.WriteLine(pFechaDeReservacion);
+        List<String> serviciosOn = new List<String>();
+        string[] servicios = {"JAWS","NVDA 2","Lanbda 1.4","Teclado especial","Línea Braille","Impresora Fuse"};
+        for (int i = 1; i < 7; i++) 
+        {
+            var pServicio = Request.Form["servicio"+i.ToString()];
+            if (pServicio=="on"){
+                serviciosOn.Add(servicios[i-1]);
+            }
+        }
+        string serviciosEspeciales = string.Join( ", ", serviciosOn);
 
-
-
-        Cubiculo.reservarCubiculo(5,pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
-
+        
+        // Se reserva el cubículo
+        Cubiculo.reservarCubiculo(Int32.Parse(pIdCubiculo),pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
+        
+        //Datos para el correo
+        string datosQR = "ID del cubiculo: "+pIdCubiculo+",ID del estudiante: "+ pIdEstudiante+",Fecha de reservacion: "+ pFechaDeUso;
+        List<Object> datosPDF = new List<Object> {pIdEstudiante,pFechaDeUso,pIdCubiculo,pHoraInicio,pHoraFinal};
+       
+        //Envio de correo
+        Models.CodigosQR cqr= new CodigosQR();
+        byte[] imagenQR = cqr.crearCodigo(datosQR);
+        Models.Pdfs pdfs = new Pdfs();
+        byte[] pdfsByte = pdfs.crear(datosPDF,serviciosOn);
+        Models.Correos correo = new Correos();
+        correo.enviarCorreo(imagenQR,pdfsByte);
 
         //Console.WriteLine(pIdEstudiante);
         //Console.WriteLine(pHoraInicio);
