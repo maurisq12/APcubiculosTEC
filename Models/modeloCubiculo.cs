@@ -227,7 +227,6 @@ public class Cubiculo{
     }
 
     public static Boolean cambiarEstadoCubiculo(int pIdCubiculo, int pEstado){
-
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 

@@ -98,14 +98,16 @@ public class Admin : Controller
     }
 
     public IActionResult cambiarEstado(){
-        Cubiculo.cambiarEstadoCubiculo(Int32.Parse(Request.Query["id"]), Int32.Parse(Request.Form["elEstado"]));
-        return View();
+        Console.WriteLine(Int32.Parse(Request.Form["elEstado"]));
+        int elEstado = Int32.Parse(Request.Form["elEstado"]);
+        int elId = Int32.Parse(Request.Form["elId"]);
+        Cubiculo.cambiarEstadoCubiculo(elId, elEstado);
+        return RedirectToAction("gestTiempos","Admin");
     }
 
     public string eliminarCubiculo(){
         return "eliminado";
     }
-    
 
 
 
