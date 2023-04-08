@@ -30,18 +30,6 @@ public class Reservas : Controller
         return View();        
     }
 
-    public string confirmando(){
-        //var idReservacion= agarrar el id
-        Models.CodigosQR miQR = new CodigosQR();
-        string elcodigo64 = miQR.crearCodigo();
-        string codigoListo = "data:image/png;charset=utf-8;base64,"+elcodigo64;
-        ViewData["Imagen"]= codigoListo;
-        Models.Pdfs nuevoPDF = new Pdfs();
-        nuevoPDF.crear();
-        //envio de correo con confirmación
-        Models.Correos servCorreo = new Correos();
-        servCorreo.enviarCorreo(codigoListo);
-        return "listo";
-    }
+
 
 }
