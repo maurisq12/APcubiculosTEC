@@ -102,9 +102,14 @@ public class Admin : Controller
         return View();
     }
 
-    public string eliminarCubiculo(){
-        return "eliminado";
+    public IActionResult eliminarCubiculo(){
+        int IdCubiculo = Int32.Parse(Request.Form["idEliminar"]);
+        Cubiculo.eliminarCubiculo(IdCubiculo);
+        var cubiculos = Cubiculo.cubiculosTodos();
+        ViewBag.Cubiculos = cubiculos;
+        return View("gestCubiculos");
     }
+
     
 
 

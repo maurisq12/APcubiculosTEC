@@ -92,8 +92,9 @@ body {
 
 .btn-delete{
   border-radius: 10px 10px 10px 10px;
-  background-color: #bb1a42;
+  background-color: #BF1C1C;
   -webkit-text-fill-color: white;
+  padding: 7px;
 }
 
 .edit-label{

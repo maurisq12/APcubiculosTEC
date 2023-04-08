@@ -1,83 +1,74 @@
 @{
-    ViewData["Title"] = "Gestión de estudiantes";
-    Layout = "AdminLayout";
+  ViewData["Title"] = "Gestión de estudiantes";
+  Layout = "AdminLayout";
 }
 
-<style> 
-    .editarBoton{
-    height:1px;
-    width:80px;
-    text-align: left;
-    line-height: 1px;
-}
-</style>
 
 <script>
-function buscar() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("busq");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tablaEstudiantes");
-  tr = table.getElementsByTagName("tr");
+  function buscar() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busq");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaEstudiantes");
+    tr = table.getElementsByTagName("tr");
 
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
       }
     }
   }
-}
 
-function eliminar(){
-  if(confirm ("¿Desea eliminar el cubículo?")== true){
-    //@Url.Action("eliminarCubiculo","Admin");
-    console.log("no");
+  function eliminar() {
+    if (confirm("¿Desea eliminar el cubículo") == true) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
-  else{
-
-  }
-}
 </script>
 
 <div class="text-center">
-    <h1 class="display-4">Gestión de cubículos</h1>
+  <h1 class="display-4">Gestión de cubículos</h1>
 
-    <div style="display: flex; flex-direction: column">
-        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar cubículo...">
-        <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
-            <thead >
-                <tr style="background: #299CCB">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Capacidad</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+  <div style="display: flex; flex-direction: column">
+    <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar cubículo...">
+    <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
+      <thead>
+        <tr style="background: #299CCB">
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Capacidad</th>
+          <th>Estado</th>
+          <th>Acciones</th>
 
-                </tr>
+        </tr>
 
-            </thead>
-            <tbody>
-                @foreach (var unCubiculo in ViewBag.Cubiculos)
-                {
-                    <tr>
-                        <td align="center"> @unCubiculo.getId() </td>
-                        <td align="center"> @unCubiculo.getNombre() </td>
-                        <td align="center"> @unCubiculo.getCapacidad() </td>
-                        <td align="center"> @unCubiculo.getEstado() </td>
-                        <td><a style="text-decoration: none;padding: 6px;"
-                    href="/Admin/editCubiculo?id=@unCubiculo.getId()" class="btn-select">Editar</a>
-                    <button class="btn-delete" onclick="eliminar()">Eliminar</td>
-                    </tr>
-                }
-
-
-                
-            </tbody>
-        </table>
-    </div>
+      </thead>
+      <tbody>
+        @foreach (var unCubiculo in ViewBag.Cubiculos)
+        {
+          <tr >
+            <td align="center"> @unCubiculo.getId() </td>
+            <td align="center"> @unCubiculo.getNombre() </td>
+            <td align="center"> @unCubiculo.getCapacidad() </td>
+            <td align="center"> @unCubiculo.getEstado() </td>
+            <td style="display: flex; justify-content: space-around;">
+              <a style="text-decoration: none;padding: 8px;" href="/Admin/editCubiculo?id=@unCubiculo.getId()"
+                class="btn-select">Editar</a>
+              <form method="POST" onsubmit="return eliminar()" action="@Url.Action("eliminarCubiculo", "Admin")">
+                <button class="btn-delete" name="idEliminar" type="submit" value=@unCubiculo.getId() >Eliminar</button>
+              </form>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
