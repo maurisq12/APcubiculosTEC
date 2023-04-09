@@ -26,15 +26,15 @@ public class AccesoController : Controller{
                     new Claim(ClaimTypes.NameIdentifier, sesion.id.ToString()),
                     new Claim(ClaimTypes.Email, objeto.correo),
                     new Claim(ClaimTypes.Role, "estudiante")
-                };
+                    };
 
-                var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
 
 
-                return RedirectToAction("Index","Cubiculos");
+                    return RedirectToAction("Index","Cubiculos");
                     
                 }
                 else{

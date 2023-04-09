@@ -56,6 +56,38 @@ public class Estudiante{
         return apellido2;
     }
 
+    public static Estudiante unEstudiante(int pIdEstudiante){
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "SELECT idEstudiante,cedula,carne, nombre, apellido1, apellido2,fechaDeNacimiento, correo,idEstadoEstudiante, contrasena FROM Estudiantes WHERE idEstudiante=@pIdEstudiante;";
+        
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@pIdEstudiante",pIdEstudiante);
+
+        Estudiante objeto = new Estudiante();
+
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                    objeto.id=Int32.Parse(dr["idEstudiante"].ToString());
+                    objeto.nombre= dr["nombre"].ToString();
+                    objeto.apellido1=dr["apellido1"].ToString();
+                    objeto.apellido2=dr["apellido2"].ToString();
+                    objeto.estado=Int32.Parse(dr["idEstadoEstudiante"].ToString());
+                    objeto.carne=Int32.Parse(dr["carne"].ToString());
+                    objeto.cedula=Int32.Parse(dr["cedula"].ToString());
+                    objeto.fechaNacimiento=DateTime.Parse(dr["fechaDeNacimiento"].ToString()).ToShortDateString();
+                    objeto.correo=dr["correo"].ToString();
+                    objeto.contrasena=dr["contrasena"].ToString();
+            }
+        }
+        conectado.Close();
+        return objeto;
+
+    }
+
     
     public static List<Estudiante> todosEstudiantes(){
         var listaResultado = new List<Estudiante>();
@@ -64,6 +96,7 @@ public class Estudiante{
         SqlConnection conectado=  conex.establecer();
 
         string query= "SELECT idEstudiante,cedula,carne, nombre, apellido1, apellido2,fechaDeNacimiento, correo,idEstadoEstudiante, contrasena FROM Estudiantes WHERE idEstudiante>1;";
+        
         
 
         SqlCommand cmd = new SqlCommand(query,conectado);

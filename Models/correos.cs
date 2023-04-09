@@ -9,12 +9,12 @@ public class Correos{
     string correoAuten = "cubiculosTEC@outlook.com";
     string contraAuten = "proyectoap123";
 
-    public string enviarCorreo(byte[] imagen1, byte[] pdfBytes){
+    public string enviarCorreo(byte[] imagen1, byte[] pdfBytes, string pCorreo){
 
        MailMessage mensaje = new MailMessage();
         mensaje.From = new MailAddress(correoAuten);
         mensaje.Subject = "Confirmación de cubículo - CubículosTEC";
-        mensaje.To.Add(new MailAddress("agfp108@gmail.com"));
+        mensaje.To.Add(new MailAddress(pCorreo));
         mensaje.Body = @"<html>
         <p>Gracias por confirmar la reservación del cubículo. Se adjunta un PDF con la información del cubículo y un código QR podrá acceder a el cubículo reservado. </p>
         </html>";

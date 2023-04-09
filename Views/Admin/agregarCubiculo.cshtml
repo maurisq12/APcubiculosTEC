@@ -1,0 +1,36 @@
+@model CubiculosTEC.Models.Cubiculo
+@{
+    ViewData["Title"] = "Agregar cubículo";
+    Layout = "AdminLayout";
+}
+
+
+
+<div>
+    <h1 class="display-4">Agregar nuevo Cubículo</h1>
+    <form method="post" action="@Url.Action("crearCubiculo", "Admin")" >
+        <div class="edit-label">
+            <label style="font-size: 20px;">Nombre</label>
+            <div class="col-sm-6">
+                <input type="text" name="elNombre" class="login-entry">
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Capacidad</label>
+            <div class="col-sm-6">
+                <input type="number" name="laCapacidad" class="login-entry" >
+            </div>
+        </div>
+        <div class="edit-label">
+            <label style="font-size: 20px;">Estado</label>
+            <div class="col-sm-6">
+                <select class="login-entry" name="elEstado">
+                    <option value="1" >Libre </option>
+                    <option value="2" >Ocupado </option>
+                    <option value="3" >En mantenimiento </option>
+                </select>
+            </div>
+        </div><br>
+        <button style="align-self: center;" class="btn-accept" type="submit">Agregar cubículo</button>
+    </form>
+</div>

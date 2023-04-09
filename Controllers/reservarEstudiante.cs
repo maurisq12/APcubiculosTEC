@@ -46,38 +46,25 @@ public class Cubiculos : Controller
         var pHoraFinal = Request.Form["fin"];
         var pFechaDeUso = Request.Form["date"];
 
-        List<String> serviciosOn = new List<String>();
-        string[] servicios = {"JAWS","NVDA 2","Lanbda 1.4","Teclado especial","Línea Braille","Impresora Fuse"};
+
+        List<int> serviciosReservacion = new List<int>();
         for (int i = 1; i < 7; i++) 
         {
             var pServicio = Request.Form["servicio"+i.ToString()];
             if (pServicio=="on"){
-                serviciosOn.Add(servicios[i-1]);
+                serviciosReservacion.Add(i);
             }
         }
-        string serviciosEspeciales = string.Join( ", ", serviciosOn);
+        //string serviciosEspeciales = string.Join( ", ", serviciosOn);
 
-        
         // Se reserva el cubículo
         Cubiculo.reservarCubiculo(Int32.Parse(pIdCubiculo),pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
+
+        //se agregan los servicios
+        Reservacion.agregarServicios(serviciosReservacion,Reservacion.utlimaReservacion(pIdEstudiante));
         
-        //Datos para el correo
-        string datosQR = "ID del cubiculo: "+pIdCubiculo+",ID del estudiante: "+ pIdEstudiante+",Fecha de reservacion: "+ pFechaDeUso;
-        List<Object> datosPDF = new List<Object> {pIdEstudiante,pFechaDeUso,pIdCubiculo,pHoraInicio,pHoraFinal};
-       
-        //Envio de correo
-        Models.CodigosQR cqr= new CodigosQR();
-        byte[] imagenQR = cqr.crearCodigo(datosQR);
-        Models.Pdfs pdfs = new Pdfs();
-        byte[] pdfsByte = pdfs.crear(datosPDF,serviciosOn);
-        Models.Correos correo = new Correos();
-        correo.enviarCorreo(imagenQR,pdfsByte);
 
-        //Console.WriteLine(pIdEstudiante);
-        //Console.WriteLine(pHoraInicio);
-
-
-/*
+        /*
         if(Cubiculo.reservarCubiculo(pIdEstudiante,pFechaDeUso,pIdCubiculo,pHoraInicio,pHoraFinal,pFechaDeReservacion)){
             //mensaje de cubiculoReservado con éxito
         }
@@ -87,6 +74,21 @@ public class Cubiculos : Controller
 
 
         return View("Index");
+    }
+
+
+        
+
+
+        
+    
+
+    public string validarReservacion(int pIdCubiculo, string pFechaDeUso, string pHoraInicio, string pHoraFinal){
+        
+        if(Reservacion.checkReservacion(pIdCubiculo, pFechaDeUso, pHoraInicio, pHoraInicio)){
+            return "libre";
+        }
+        return "ocupado";
     }
 
     
