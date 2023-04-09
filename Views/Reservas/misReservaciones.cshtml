@@ -51,18 +51,21 @@ function buscar() {
                     <td align="center"> @unaReserva.fechaDeReservacion</td>
                     <td align="center"> @unaReserva.horaInicio</td>
                     <td align="center"> @unaReserva.horaFinal</td>
-                    <script>
-                      if(@unaReserva.confirmacion=="True"){
-                        <td>
-                        <label> Confirmada </label>
-                        </td>
-                      else{
-                        <td>
-                        <label> Confirmadan't </label>
-                        </td>
-                      }
-                      }
-                    </script>
+                    @if (@unaReserva.confirmacion=="False")
+                    {
+                      
+                      <td>
+                        <form method="POST" onsubmit="return eliminar()" action="@Url.Action("confirmar", "Reservas")">
+                        <button class="btn-select" name="elIdReservacion" type="submit" value=@unaReserva.idReservacion >Confirmar</button>
+                        </form>
+                      </td>
+                    }
+                    else
+                    {
+                      <td> Confirmada </td>
+                    }
+
+                   
                     </tr>
                 }
             </tbody>

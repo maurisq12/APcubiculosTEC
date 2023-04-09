@@ -56,22 +56,22 @@ public class Admin : Controller
     }
 
     [HttpPost]
-    public void editEstudianteconf(){
+    public IActionResult editEstudianteconf(){
         Estudiante.editarEstudiante(Int32.Parse(Request.Form["laCedula"]),Int32.Parse(Request.Form["elCarne"]),Request.Form["elNombre"],Request.Form["elApellido1"],Request.Form["elApellido2"],Request.Form["laFecha"],Request.Form["elCorreo"],Request.Form["laContrasena"], Int16.Parse(Request.Form["elEstado"]));
-        //return View();
+        return View("realizadoAdmin");
 
     }
 
     [HttpPost]
-    public void editCubiculoconf(){
+    public IActionResult editCubiculoconf(){
         Cubiculo.editarCubiculo(Int32.Parse(Request.Form["elId"]),Request.Form["elNombre"],Int32.Parse(Request.Form["elEstado"]),Int32.Parse(Request.Form["laCapacidad"]));
-        //return View();
+        return View("realizadoAdmin");
     }
 
     [HttpPost]
-    public void editReservaconf(){
+    public IActionResult editReservaconf(){
         Reservacion.modificarReservacion(Int32.Parse(Request.Form["elId"]), Int32.Parse(Request.Form["elIdCubiculo"]),Int32.Parse(Request.Form["elIdEstudiante"]),Request.Form["laFechaDeUso"],Request.Form["laHoraInicio"],Request.Form["laHoraFinal"],Request.Form["laFechaDeReserva"],Request.Form["laConfirmacion"]);
-        //return View();
+        return View("realizadoAdmin");
     }
 
     public IActionResult asignacionesEstudiante(){

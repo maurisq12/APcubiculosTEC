@@ -31,9 +31,9 @@ public class Reservas : Controller
     }
 
     
-
+    [HttpPost]
     public IActionResult confirmar(){
-        int pIdReservacion=Int32.Parse(Request.Query["id"]);
+        int pIdReservacion=Int32.Parse(Request.Form["elIdReservacion"]);
         var reserva = Reservacion.unaReservacion(pIdReservacion);
         Reservacion.confirmarReservacion(pIdReservacion);
         //Datos para el correo

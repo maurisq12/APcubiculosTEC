@@ -73,7 +73,7 @@ public class Cubiculos : Controller
         }*/
 
 
-        return View("Index");
+        return View();
     }
 
 
