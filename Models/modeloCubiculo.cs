@@ -206,7 +206,7 @@ public class Cubiculo{
     }
 
     public static Boolean eliminarCubiculo(int pIdCubiculo){
-
+        try{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
@@ -224,6 +224,11 @@ public class Cubiculo{
         }
         conectado.Close();
         return true;
+        }catch{
+            return false;
+        }
+
+
     }
 
     public static Boolean cambiarEstadoCubiculo(int pIdCubiculo, int pEstado){

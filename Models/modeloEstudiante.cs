@@ -157,6 +157,7 @@ public class Estudiante{
 
     public static Boolean eliminarEstudiante(int pIdEstudiante){
 
+        try{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
@@ -173,7 +174,12 @@ public class Estudiante{
             }
         }
         conectado.Close();
-        return true;
+            return true;
+        }catch{
+            return false;
+        }
+
+        
     }
 
     

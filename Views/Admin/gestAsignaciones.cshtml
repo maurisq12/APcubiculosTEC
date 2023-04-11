@@ -1,62 +1,81 @@
 @{
-    ViewData["Title"] = "Gestión de asignaciones";
-    Layout = "AdminLayout";
+  ViewData["Title"] = "Gestión de asignaciones";
+  Layout = "AdminLayout";
 }
 
 
 
 <script>
-function buscar() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("busq");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tablaEstudiantes");
-  tr = table.getElementsByTagName("tr");
+  function eliminar() {
+    if (confirm("¿Desea eliminar esta reservación?") == true) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  function buscar() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busq");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaEstudiantes");
+    tr = table.getElementsByTagName("tr");
 
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
       }
     }
   }
-}
 </script>
 
 <div class="text-center">
-    <h1 class="display-4">Todas las reservaciones</h1>
+  <h1 class="display-4">Todas las reservaciones</h1>
 
-    <div style="display: flex; flex-direction: column">
-        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar reserva...">
-        <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
-            <thead >
-                <tr style="background: #299CCB">
-                <th style="color:white; font-size:110%">ID de reservacion</th>
-                <th style="color:white; font-size:110%">Usuario</th>
-                <th style="color:white; font-size:110%">Horas que se utilizó</th>
-                <th style="color:white; font-size:110%">Fecha</th>
-                <th style="color:white; font-size:110%">Acciones</th>
+  <div style="display: flex; flex-direction: column">
+    <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar reserva...">
+    <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
+      <thead>
+        <tr style="background: #299CCB">
+          <th style="color:white; font-size:110%">ID de reservacion</th>
+          <th style="color:white; font-size:110%">Usuario</th>
+          <th style="color:white; font-size:110%">Horas que se utilizó</th>
+          <th style="color:white; font-size:110%">Fecha</th>
+          <th style="color:white; font-size:110%">Acciones</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var unaReserva in ViewBag.Reservas)
-                {
-                    <tr>
-                    <td align="center"> @unaReserva.idReservacion</td>
-                    <td align="center"> @unaReserva.estudianteReservador</td>
-                    <td align="center"> @unaReserva.horasUtilizado</td>
-                    <td align="center"> @unaReserva.fechaDeReservacion</td>
-                    <td><a style="text-decoration: none;padding: 6px;"
-                    href="/Admin/editReserva?id=@unaReserva.idReservacion" class="btn-select">Editar</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var unaReserva in ViewBag.Reservas)
+        {
+          <tr>
+            <td align="center"> @unaReserva.idReservacion</td>
+            <td align="center"> @unaReserva.estudianteReservador</td>
+            <td align="center"> @unaReserva.horasUtilizado</td>
+            <td align="center"> @unaReserva.fechaDeReservacion</td>
+            <td style="display: flex; justify-content: space-around;">
+              <a style="text-decoration: none;padding: 6px;" href="/Admin/editReserva?id=@unaReserva.idReservacion"
+                class="btn-select">Editar</a>
+              <form method="POST" onsubmit="return eliminar()" action="@Url.Action("eliminarAsignacion", "Admin")">
+                <button class="btn-delete" name="idEliminar" type="submit"
+                  value=@unaReserva.idReservacion>Eliminar</button>
+              </form>
+            </td>
+
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+    @if (ViewBag.eliminado == false)
+  {
+    <script>alert("No se pudo eliminar la asignación");</script>
+  }
 </div>
 

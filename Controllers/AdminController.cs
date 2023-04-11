@@ -131,7 +131,7 @@ public class Admin : Controller
     public IActionResult eliminarCubiculo()
     {
         int IdCubiculo = Int32.Parse(Request.Form["idEliminar"]);
-        Cubiculo.eliminarCubiculo(IdCubiculo);
+        ViewBag.eliminado = Cubiculo.eliminarCubiculo(IdCubiculo);
         var cubiculos = Cubiculo.cubiculosTodos();
         ViewBag.Cubiculos = cubiculos;
         return View("gestCubiculos");
@@ -139,10 +139,17 @@ public class Admin : Controller
 
     public IActionResult eliminarEstudiante()
     {
-        Estudiante.eliminarEstudiante(Int32.Parse(Request.Form["idEliminar"]));
+        ViewBag.eliminado = Estudiante.eliminarEstudiante(Int32.Parse(Request.Form["idEliminar"]));
         var estudiantes = Estudiante.todosEstudiantes();
         ViewBag.Estudiantes = estudiantes;
         return View("gestEstudiantes");
+    }
+    public IActionResult eliminarAsignacion(){
+
+        ViewBag.eliminado = Reservacion.eliminarReservacion(Int32.Parse(Request.Form["idEliminar"]));
+        var asignaciones = Reservacion.todasReservaciones();
+        ViewBag.Reservas = asignaciones;
+        return View("gestAsignaciones");
     }
 
 

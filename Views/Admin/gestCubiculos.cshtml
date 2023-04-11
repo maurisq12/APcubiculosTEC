@@ -55,7 +55,7 @@
       <tbody>
         @foreach (var unCubiculo in ViewBag.Cubiculos)
         {
-          <tr >
+          <tr>
             <td align="center"> @unCubiculo.getId() </td>
             <td align="center"> @unCubiculo.getNombre() </td>
             <td align="center"> @unCubiculo.getCapacidad() </td>
@@ -64,11 +64,15 @@
               <a style="text-decoration: none;padding: 8px;" href="/Admin/editCubiculo?id=@unCubiculo.getId()"
                 class="btn-select">Editar</a>
               <form method="POST" onsubmit="return eliminar()" action="@Url.Action("eliminarCubiculo", "Admin")">
-                <button class="btn-delete" name="idEliminar" type="submit" value=@unCubiculo.getId() >Eliminar</button>
+                <button class="btn-delete" name="idEliminar" type="submit" value=@unCubiculo.getId()>Eliminar</button>
               </form>
           </tr>
         }
       </tbody>
     </table>
   </div>
+  @if (ViewBag.eliminado == false)
+  {
+    <script>alert("No se pudo eliminar el cubiculo");</script>
+  }
 </div>

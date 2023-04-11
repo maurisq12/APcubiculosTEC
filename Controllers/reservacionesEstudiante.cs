@@ -52,6 +52,16 @@ public class Reservas : Controller
 
         return View();
     }
+    public IActionResult eliminarReserva(){
+        int pIdEstudiante = Int32.Parse(User.Claims.Where(x=> x.Type == ClaimTypes.NameIdentifier).SingleOrDefault().Value);
+        int pIdReservacion=Int32.Parse(Request.Form["idEliminar"]);
+        Reservacion.eliminarReservacion(pIdReservacion);
+
+        List<Reservacion> reservasEstudiante = Reservacion.reservacionesUsuario(pIdEstudiante);
+        ViewBag.Reservas =reservasEstudiante;
+        return View("misReservaciones");
+    }
+
 
 
 
