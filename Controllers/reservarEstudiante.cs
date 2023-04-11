@@ -57,23 +57,26 @@ public class Cubiculos : Controller
         }
         //string serviciosEspeciales = string.Join( ", ", serviciosOn);
 
-        // Se reserva el cubículo
-        Cubiculo.reservarCubiculo(Int32.Parse(pIdCubiculo),pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
 
-        //se agregan los servicios
-        Reservacion.agregarServicios(serviciosReservacion,Reservacion.utlimaReservacion(pIdEstudiante));
-        
 
-        /*
-        if(Cubiculo.reservarCubiculo(pIdEstudiante,pFechaDeUso,pIdCubiculo,pHoraInicio,pHoraFinal,pFechaDeReservacion)){
-            //mensaje de cubiculoReservado con éxito
+        if (validarReservacion(Int32.Parse(pIdCubiculo),pFechaDeUso,pHoraInicio,pHoraFinal)) {
+            // Se reserva el cubículo
+            Cubiculo.reservarCubiculo(Int32.Parse(pIdCubiculo),pIdEstudiante,pFechaDeUso,pHoraInicio,pHoraFinal,pFechaDeReservacion);
+
+            //se agregan los servicios
+            Reservacion.agregarServicios(serviciosReservacion,Reservacion.utlimaReservacion(pIdEstudiante));
+
+            return View();
+
         }
         else{
-            //mensaje de error, intentar de nuevo
-        }*/
+            var cubiculos= Cubiculo.cubiculosDisponibles();
+            ViewBag.Disponibilidad=false;
+            ViewBag.Cubiculos = cubiculos;
 
+            return View("Index");
+        }
 
-        return View();
     }
 
 
@@ -83,12 +86,12 @@ public class Cubiculos : Controller
         
     
 
-    public string validarReservacion(int pIdCubiculo, string pFechaDeUso, string pHoraInicio, string pHoraFinal){
+    public Boolean validarReservacion(int pIdCubiculo, string pFechaDeUso, string pHoraInicio, string pHoraFinal){
         
         if(Reservacion.checkReservacion(pIdCubiculo, pFechaDeUso, pHoraInicio, pHoraInicio)){
-            return "libre";
+            return true;
         }
-        return "ocupado";
+        return false;
     }
 
     
