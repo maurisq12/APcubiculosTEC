@@ -152,14 +152,15 @@ public class Admin : Controller
         return View("gestAsignaciones");
     }
 
+    public IActionResult agregarCubiculo(){
+        return View();
+    }
 
-
-
-
-
-
-
-
-
+    public IActionResult crearCubiculo(){
+        Cubiculo.crearCubiculo(Request.Form["elNombre"],Int32.Parse(Request.Form["elEstado"]), Int32.Parse(Request.Form["laCapacidad"]));
+        var cubiculos = Cubiculo.cubiculosTodos();
+        ViewBag.Cubiculos = cubiculos;
+        return View("gestCubiculos");
+    }
 
 }

@@ -39,7 +39,8 @@
   <h1 class="display-4">Gestión de cubículos</h1>
 
   <div style="display: flex; flex-direction: column">
-    <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar cubículo...">
+    <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar cubículo..."><br>
+    <button class="btn-accept" onclick="location.href='@Url.Action("agregarCubiculo", "Admin")'">Agregar cubículo</button>
     <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
       <thead>
         <tr style="background: #299CCB">

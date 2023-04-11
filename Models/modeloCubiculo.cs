@@ -162,7 +162,7 @@ public class Cubiculo{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "agregarCubiculo @pNombre, @pEstado, @pCapacidad;";
+        string query= "crearCubiculo @pNombre, @pCapacidad, @pEstado;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         cmd.Parameters.AddWithValue("@pNombre",pNombre);
