@@ -80,10 +80,6 @@ public class Cubiculos : Controller
     }
 
 
-        
-
-
-        
     
 
     public Boolean validarReservacion(int pIdCubiculo, string pFechaDeUso, string pHoraInicio, string pHoraFinal){

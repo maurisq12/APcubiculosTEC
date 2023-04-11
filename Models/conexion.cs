@@ -15,7 +15,7 @@ public class SQLConexion{
         try{
             conex.ConnectionString=connectionString;
             conex.Open();
-            Console.WriteLine("toy conectado");
+            Console.WriteLine("Conectado a la base de datos de CubiculosTEC");
         }
         catch(SqlException e){
             Console.WriteLine(e.ToString());
@@ -24,14 +24,6 @@ public class SQLConexion{
         return conex;
     }
 
-    public void llamada(){
-        SqlCommand com = new SqlCommand("SELECT * FROM Estudiantes;",conex);
-        using (SqlDataReader reader = com.ExecuteReader())
-        {
-            while (reader.Read()){
-                Console.WriteLine(String.Format("{0}",reader["Nombre"]));
-            }
-        }
-    }
+    
 }
 

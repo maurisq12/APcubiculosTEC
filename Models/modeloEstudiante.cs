@@ -95,9 +95,7 @@ public class Estudiante{
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        string query= "SELECT idEstudiante,cedula,carne, nombre, apellido1, apellido2,fechaDeNacimiento, correo,idEstadoEstudiante, contrasena FROM Estudiantes WHERE idEstudiante>1;";
-        
-        
+        string query= "SELECT idEstudiante,cedula,carne, nombre, apellido1, apellido2,fechaDeNacimiento, correo,idEstadoEstudiante, contrasena FROM Estudiantes WHERE idEstudiante>1;";        
 
         SqlCommand cmd = new SqlCommand(query,conectado);
         
@@ -123,13 +121,10 @@ public class Estudiante{
     }
 
     public static Boolean editarEstudiante(int pCedula, int pCarne, string pNombre, string pApellido1, string pApellido2, string pFechaNacimiento, string pCorreo, string pContrasena, int pEstado){
-    //public static Boolean editarEstudiante(string pNombre, string pApellido1, string pApellido2, string pFechaNacimiento, string pCorreo, string pContrasena, int pEstado){
-
 
         SQLConexion conex = new SQLConexion();
         SqlConnection conectado=  conex.establecer();
 
-        //string query= "modificarEstudiante @pCedula, @pCarne, @pNombre, @pApellido1, @pApellido2, @pEdad, @pFechaNacimiento, @pCorreo, @pContrasena;";
         string query= "modificarEstudiante @pCorreo, @pContrasena,@pCedula,@pCarne, @pNombre, @pApellido1, @pApellido2, @pFechaNacimiento, @pEstado;";
 
         SqlCommand cmd = new SqlCommand(query,conectado);
@@ -151,7 +146,6 @@ public class Estudiante{
             }
         }
         conectado.Close();
-        Console.WriteLine("deberia");
         return true;
     }
 

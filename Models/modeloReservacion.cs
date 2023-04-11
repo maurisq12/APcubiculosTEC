@@ -17,16 +17,10 @@ public class Reservacion
     public string horaFinal;
     public string confirmacion;
     public string fechaDeReservacion;
-
     public int idReservacion;
-
     public string horasUtilizado;
 
-
-
-
-    public Reservacion()
-    {
+    public Reservacion(){
 
     }
 
