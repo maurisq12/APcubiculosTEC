@@ -1,65 +1,76 @@
 @{
-    ViewData["Title"] = "Gestión de estudiantes";
-    Layout = "AdminLayout";
+  ViewData["Title"] = "Gestión de estudiantes";
+  Layout = "AdminLayout";
 }
 
 
 <script>
-function buscar() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("busq");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tablaEstudiantes");
-  tr = table.getElementsByTagName("tr");
+  function eliminar() {
+    if (confirm("¿Desea eliminar este estudiante") == true) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  function buscar() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busq");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tablaEstudiantes");
+    tr = table.getElementsByTagName("tr");
 
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
       }
     }
   }
-}
 </script>
 
 <div class="text-center">
-    <h1 class="display-4">Gestión de estudiantes</h1>
+  <h1 class="display-4">Gestión de estudiantes</h1>
 
-    <div style="display: flex; flex-direction: column">
-        <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar estudiante...">
-        <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
-            <thead >
-                <tr style="background: #299CCB">
-                <th style="color:white; font-size:110%">Nombre</th>
-                <th style="color:white; font-size:110%">Carnet</th>
-                <th style="color:white; font-size:110%">Correo electrónico</th>
-                <th style="color:white; font-size:110%">Estado</th>
-                <th style="color:white; font-size:110%">Acciones</th>
+  <div style="display: flex; flex-direction: column">
+    <input class="search-bar" type="text" id="busq" onkeyup="buscar()" placeholder="Buscar estudiante...">
+    <table id="tablaEstudiantes" style="margin-top: 60px;" class="table">
+      <thead>
+        <tr style="background: #299CCB">
+          <th style="color:white; font-size:110%">Nombre</th>
+          <th style="color:white; font-size:110%">Carnet</th>
+          <th style="color:white; font-size:110%">Correo electrónico</th>
+          <th style="color:white; font-size:110%">Estado</th>
+          <th style="color:white; font-size:110%">Acciones</th>
 
-                </tr>
+        </tr>
 
-            </thead>
-            <tbody>
-                @foreach (var unEstudiante in ViewBag.Estudiantes)
-                {
-                    <tr>
-                    <td align="center" > @unEstudiante.nombre @unEstudiante.apellido1 @unEstudiante.apellido2 </td>
-                    <td align="center" > @unEstudiante.carne </td>
-                    <td align="center" > @unEstudiante.correo </td>
-                    <td align="center" > @unEstudiante.estado </td>
-                    <td>
-                      <a style="text-decoration: none;padding: 6px;"
-                    href="/Admin/editEstudiante?id=@unEstudiante.id" class="btn-select">Editar</a>
-                    <a style="text-decoration: none;padding: 6px;"
-                    href="/Admin/asignacionesEstudiante?id=@unEstudiante.id" class="btn-select">Historial</a>
-                    </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+      </thead>
+      <tbody>
+        @foreach (var unEstudiante in ViewBag.Estudiantes)
+        {
+          <tr>
+            <td align="center"> @unEstudiante.nombre @unEstudiante.apellido1 @unEstudiante.apellido2 </td>
+            <td align="center"> @unEstudiante.carne </td>
+            <td align="center"> @unEstudiante.correo </td>
+            <td align="center"> @unEstudiante.estado </td>
+            <td style="display: flex; justify-content: space-around;">
+              <a style="text-decoration: none;padding: 6px;" href="/Admin/editEstudiante?id=@unEstudiante.id"
+                class="btn-select">Editar</a>
+              <a style="text-decoration: none;padding: 6px;" href="/Admin/asignacionesEstudiante?id=@unEstudiante.id"
+                class="btn-select">Historial</a>
+              <form method="POST" onsubmit="return eliminar()" action="@Url.Action("eliminarEstudiante", "Admin")">
+                <button class="btn-delete" name="idEliminar" type="submit" value=@unEstudiante.id>Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
