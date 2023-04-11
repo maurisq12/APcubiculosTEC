@@ -77,10 +77,6 @@ public class Cubiculos : Controller
     }
 
 
-        
-
-
-        
     
 
     public string validarReservacion(int pIdCubiculo, string pFechaDeUso, string pHoraInicio, string pHoraFinal){
