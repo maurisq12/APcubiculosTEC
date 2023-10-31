@@ -74,6 +74,36 @@ public class Cubiculo{
         return listaResultado;  
     }
 
+    public static Cubiculo unCubiculo(int pIdCubiculo){
+        var listaResultado = new List<Cubiculo>();
+
+        SQLConexion conex = new SQLConexion();
+        SqlConnection conectado=  conex.establecer();
+
+        string query= "SELECT idCubiculo, nombre, capacidad, tiempoMaximo, idEstado FROM Cubiculos WHERE idCubiculo=@pIdCubiculo;";
+        
+        
+
+        SqlCommand cmd = new SqlCommand(query,conectado);
+        cmd.Parameters.AddWithValue("@pIdCubiculo",pIdCubiculo);
+        
+        using (SqlDataReader dr = cmd.ExecuteReader()){
+            while(dr.Read()){
+                Cubiculo objeto = new Cubiculo(){
+                    IDCubiculo=Int32.Parse(dr["idCubiculo"].ToString()),
+                    nombre= dr["nombre"].ToString(),
+                    capacidad=Int32.Parse(dr["capacidad"].ToString()),
+                    tiempoMaximo=Int32.Parse(dr["capacidad"].ToString()), 
+                    estado= dr["idEstado"].ToString() 
+                };
+                listaResultado.Add(objeto);
+            }
+        }
+        conectado.Close();
+        return listaResultado[0]; 
+
+    }
+
     public static List<Cubiculo> cubiculosTodos(){
         var listaResultado = new List<Cubiculo>();
 

@@ -39,7 +39,7 @@ public class Admin : Controller
 
     public IActionResult editEstudiante()
     {
-        var estudianteEdit = Estudiante.todosEstudiantes()[Int32.Parse(Request.Query["id"]) - 2];
+        var estudianteEdit = Estudiante.unEstudiante((Int32.Parse(Request.Query["id"])));
         estudianteEdit.fechaNacimiento = DateTime.Parse(estudianteEdit.fechaNacimiento).ToString("yyyy-MM-dd");
         ViewBag.Estudiante = estudianteEdit;
         return View();
@@ -47,14 +47,14 @@ public class Admin : Controller
 
     public IActionResult editCubiculo()
     {
-        var cubiculoEdit = Cubiculo.cubiculosTodos()[Int32.Parse(Request.Query["id"]) - 1];
+        var cubiculoEdit = Cubiculo.unCubiculo(Int32.Parse(Request.Query["id"]));
         ViewBag.Cubiculo = cubiculoEdit;
         return View();
     }
 
     public IActionResult editReserva()
     {
-        var reservaEdit = Reservacion.todasReservaciones()[Int32.Parse(Request.Query["id"]) - 1];
+        var reservaEdit = Reservacion.unaReservacion((Int32.Parse(Request.Query["id"]) ));
         reservaEdit.fechaDeUso = DateTime.Parse(reservaEdit.fechaDeUso).ToString("yyyy-MM-dd");
         reservaEdit.fechaDeReservacion = DateTime.Parse(reservaEdit.fechaDeReservacion).ToString("yyyy-MM-dd");
         ViewBag.Reserva = reservaEdit;
@@ -113,7 +113,7 @@ public class Admin : Controller
 
     public IActionResult gestCubiculoTiempo()
     {
-        var cubiculoGest = Cubiculo.cubiculosTodos()[Int32.Parse(Request.Query["id"]) - 1];
+        var cubiculoGest = Cubiculo.unCubiculo(Int32.Parse(Request.Query["id"]));
         ViewBag.Cubiculo = cubiculoGest;
         return View();
     }

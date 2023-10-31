@@ -18,7 +18,7 @@ public class Registro : Controller{
             if(new LO_Usuario().verificarCorreo(objeto.correo)){
                 new LO_Usuario().nuevoUsuario(objeto);
                 new Correos().correoRegistro(objeto);
-                return RedirectToAction("Index","Acesso");
+                return RedirectToAction("Index","Acceso");
             }
         
             else{
